@@ -1,0 +1,10 @@
+﻿  window.cpp
+  util.cpp
+  Code wird generiert...
+  Kompilieren...
+  main.cpp
+  game.cpp
+c:\users\aaron\desktop\tholib\simulator\simulator\game.cpp(10): warning C4305: "+=": Verkürzung von "double" in "float"
+  Code wird generiert...
+  Simulator.vcxproj -> C:\Users\Aaron\Desktop\ThoLib\Simulator\Debug\Simulator.exe
+  Simulator.vcxproj -> C:\Users\Aaron\Desktop\ThoLib\Simulator\Debug\Simulator.pdb (Partial PDB)
