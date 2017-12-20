@@ -6,18 +6,7 @@
 //  Copyright © 2017 Aaron Hodel. All rights reserved.
 //
 
-#define WIDTH 15
-#define HEIGHT 10
-
-#include <iostream>
-#include <vector>
-#include "../ThoLib.h"
-
-typedef struct {
-    int x, y;
-} pos;
-
-int timer = 0;
+#include "Game.h"
 
 #define TIME 60/6
 
@@ -25,7 +14,7 @@ pos foodpos = { rand() % WIDTH, rand() % HEIGHT };
 int direction = 0;
 std::vector<pos> currentSnake = std::vector<pos>();
 
-void render()
+void Snake::render()
 {
     while(currentSnake.size() < 4) {
         currentSnake.push_back({ WIDTH / 2, HEIGHT / 2 });
@@ -67,7 +56,7 @@ void render()
     writePixel(foodpos.x, foodpos.y, 0xFF0000);
 }
 
-void direction_press(int dir)
+void Snake::direction_press(int dir)
 {
     if(direction % 2 == dir % 2)
     {
@@ -76,7 +65,3 @@ void direction_press(int dir)
     }
     direction = dir;
 }
-
-void a_press() {}
-void b_press() {}
-

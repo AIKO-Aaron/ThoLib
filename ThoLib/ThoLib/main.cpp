@@ -9,9 +9,14 @@
 #include <iostream>
 #include "ThoLib.h"
 #include "arduino.h"
+#include "Game.h"
 
 
 int main(int argc, const char * argv[]) {
     setup();
+    Game *game = new Snake();
+    
+    game->render();
+    
     return 0;
 }

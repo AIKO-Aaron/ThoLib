@@ -17,10 +17,13 @@
 #define KEY_LEFT 2
 #define KEY_UP 3
 
+#define WIDTH 15
+#define HEIGHT 10
+
 void setup();
 
 void writeInt(int a);
-inline void writePixel(uint8_t x, uint8_t y, int color);
+void writePixel(uint8_t x, uint8_t y, int color);
 
 void fillRect(uint8_t x, uint8_t y, uint8_t w, uint8_t h, int color);
 
