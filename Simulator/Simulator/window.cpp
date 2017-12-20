@@ -36,6 +36,8 @@ void startLoop()
                 else if(e.key.keysym.sym == SDLK_LEFT) direction_press(KEY_LEFT);
                 else if(e.key.keysym.sym == SDLK_UP) direction_press(KEY_UP);
                 else if(e.key.keysym.sym == SDLK_DOWN) direction_press(KEY_DOWN);
+                else if(e.key.keysym.sym == SDLK_KP_ENTER || e.key.keysym.sym == SDLK_SPACE) a_press();
+                else if(e.key.keysym.sym == SDLK_LSHIFT || e.key.keysym.sym == SDLK_b) b_press();
 			}
 		}
 

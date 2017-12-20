@@ -36,6 +36,8 @@
 		9373C74C1FE9DF07007F5293 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		9373C74D1FE9DF07007F5293 /* game.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = game.cpp; sourceTree = "<group>"; };
 		9373C74E1FE9DF07007F5293 /* util.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = util.h; sourceTree = "<group>"; };
+		9373C75F1FEA9B9C007F5293 /* snake.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = snake.h; sourceTree = "<group>"; };
+		9373C7601FEA9BBF007F5293 /* tetris.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = tetris.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,6 +71,7 @@
 		9373C73E1FE9DDA3007F5293 /* Simulator */ = {
 			isa = PBXGroup;
 			children = (
+				9373C75E1FEA9B8E007F5293 /* games */,
 				9373C7461FE9DEB8007F5293 /* SDL2.framework */,
 				9373C74C1FE9DF07007F5293 /* main.cpp */,
 				9373C74D1FE9DF07007F5293 /* game.cpp */,
@@ -79,6 +82,15 @@
 				9373C7481FE9DF07007F5293 /* window.h */,
 			);
 			path = Simulator;
+			sourceTree = "<group>";
+		};
+		9373C75E1FEA9B8E007F5293 /* games */ = {
+			isa = PBXGroup;
+			children = (
+				9373C75F1FEA9B9C007F5293 /* snake.h */,
+				9373C7601FEA9BBF007F5293 /* tetris.h */,
+			);
+			path = games;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

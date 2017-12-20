@@ -7,9 +7,21 @@
 #include "util.h"
 #include <iostream>
 
+#define SIDEWAYS
+
+#ifdef SIDEWAYS
+
+#define WIDTH 10
+#define HEIGHT 15
+
+#else
+
 #define WIDTH 15
 #define HEIGHT 10
-#define RECT_SIZE 60
+
+#endif
+
+#define RECT_SIZE 40
 
 #define KEY_RIGHT 0
 #define KEY_DOWN 1
