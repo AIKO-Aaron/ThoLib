@@ -19,3 +19,14 @@ void fillRect(int x, int y, int w, int h, int color)
 		}
 	}
 }
+
+void fillEllipse(int x, int y, int a, int b, int color)
+{
+    for (int i = -a; i <= a; i++)
+    {
+        for (int j = -b; j <= b; j++)
+        {
+            if((float) (j * j) / (float)(a * a) + (float)(i * i) / (float)(b * b) <= 1) drawPixel(x + j, y + i, color);
+        }
+    }
+}

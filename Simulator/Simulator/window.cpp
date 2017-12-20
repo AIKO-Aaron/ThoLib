@@ -35,12 +35,7 @@ void startLoop(renderFunc func)
 
 		// game....
 
-		for (int i = 0; i < WIDTH * HEIGHT; i++) pixels[i] = 0xFF00FF;
-		for (int i = 0; i < 2; i++)
-		{
-			pixels[posToIndex(i, 0)] = 0xFF0000;
-			pixels[posToIndex(i, 1)] = 0xFF0000;
-		}
+		for (int i = 0; i < WIDTH * HEIGHT; i++) pixels[i] = 0;
 		func();
 
 		SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0xFF);
