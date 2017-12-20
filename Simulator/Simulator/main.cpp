@@ -5,7 +5,8 @@
 
 int main(int argc, char **args)
 {
-	startLoop(render);
+    srand((int) time(NULL));
+	startLoop();
 	// std::cin.get();
 	return 0;
 }

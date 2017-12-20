@@ -1,11 +1,12 @@
 #include "window.h"
+#include "game.h"
 #include <cstdio>
 #include <string>
 #include <iostream>
 
 int *pixels = new int[WIDTH * HEIGHT];
 
-void startLoop(renderFunc func)
+void startLoop()
 {
 	SDL_Init(SDL_INIT_EVERYTHING);
 	window = SDL_CreateWindow("Simulator", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, WIDTH * RECT_SIZE, HEIGHT * RECT_SIZE, SDL_WINDOW_OPENGL);
@@ -30,13 +31,18 @@ void startLoop(renderFunc func)
 			else if (e.type == SDL_KEYDOWN)
 			{
 				if (e.key.keysym.sym == SDLK_ESCAPE) running = false;
+                
+                if(e.key.keysym.sym == SDLK_RIGHT) direction_press(KEY_RIGHT);
+                else if(e.key.keysym.sym == SDLK_LEFT) direction_press(KEY_LEFT);
+                else if(e.key.keysym.sym == SDLK_UP) direction_press(KEY_UP);
+                else if(e.key.keysym.sym == SDLK_DOWN) direction_press(KEY_DOWN);
 			}
 		}
 
 		// game....
 
 		for (int i = 0; i < WIDTH * HEIGHT; i++) pixels[i] = 0;
-		func();
+		render();
 
 		SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0xFF);
 		SDL_RenderClear(renderer);

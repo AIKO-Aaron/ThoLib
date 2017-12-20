@@ -11,7 +11,10 @@
 #define HEIGHT 10
 #define RECT_SIZE 60
 
-typedef void(*renderFunc)();
+#define KEY_RIGHT 0
+#define KEY_DOWN 1
+#define KEY_LEFT 2
+#define KEY_UP 3
 
 static inline uint8_t posToIndex(uint8_t x, uint8_t y)
 {
@@ -21,6 +24,6 @@ static inline uint8_t posToIndex(uint8_t x, uint8_t y)
 static SDL_Window *window;
 static SDL_Renderer *renderer;
 
-void startLoop(renderFunc func);
+void startLoop();
 
 #endif
