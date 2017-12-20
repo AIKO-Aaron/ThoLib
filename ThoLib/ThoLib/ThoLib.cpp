@@ -18,6 +18,7 @@ void setup()
     teensy = openArduino();
     
     writeInt(0xDDCCBBAA);
+    while(readArduino(teensy) != 0x0A) usleep(10000);
 }
 
 void writeInt(int a)

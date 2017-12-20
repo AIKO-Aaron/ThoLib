@@ -16,7 +16,7 @@ int main(int argc, const char * argv[]) {
     setup();
     Game *game = new Snake();
     
-    game->render();
+    game->run();
     
     return 0;
 }

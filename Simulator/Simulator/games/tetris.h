@@ -1,6 +1,7 @@
 #include "game.h"
 #include <iostream>
 #include <vector>
+#include <unistd.h>
 
 #define TIME 60 / 2
 
@@ -56,6 +57,19 @@ void newBrick()
                 for(int k = 0; k < WIDTH; k++) field[k + j * WIDTH] = field[k + (j-1) * WIDTH];
             }
         }
+        
+        for(int i = WIDTH * HEIGHT - 1; i >= 0; i--)
+        {
+            if(field[i] == 0) continue; // No brick that could fall down...
+            if(i / WIDTH != HEIGHT - 1 && field[i + WIDTH] == 0) // Below brick is free
+            {
+                if(i % WIDTH != 0 && field[i - 1] != field[i] && i % WIDTH != WIDTH - 1 && field[i + 1] != field[i] && i / WIDTH != 0 && field[i - WIDTH] != field[i])
+                {
+                    field[i + WIDTH] = field[i];
+                    field[i] = 0;
+                }
+            }
+        }
     }
     
     pos* p = bricks[rand() % 7];
@@ -63,7 +77,12 @@ void newBrick()
         movingBrick[i] = p[i];
         if(field[movingBrick[i].x + movingBrick[i].y * WIDTH] != 0)
         {
-            // TODO: Game over
+            currentIndex = 0;
+            for(int i = 0; i < WIDTH * HEIGHT; i++) field[i] = 0;
+            usleep(1000 * 2000);
+            memset(movingBrick, 0, sizeof(pos) * 4);
+            pos* p = bricks[rand() % 7];
+            for(int i = 0; i < 4; i++) movingBrick[i] = p[i];
             std::cout << "Game over...." << std::endl;
         }
     }
@@ -75,6 +94,13 @@ void rotateRight()
     for(int i = 0; i < 4; i++)
     {
         int l = movingBrick[i].x;
+        int x = (movingBrick[i].y - center.y) + center.x;
+        int y = -(l - center.x) + center.y;
+        if(x < 0 || x >= WIDTH || y < 0 || y >= HEIGHT || field[x + y * WIDTH] != 0) return;
+    }
+    for(int i = 0; i < 4; i++)
+    {
+        int l = movingBrick[i].x;
         movingBrick[i].x = (movingBrick[i].y - center.y) + center.x;
         movingBrick[i].y = -(l - center.x) + center.y;
     }
@@ -83,6 +109,13 @@ void rotateRight()
 void rotateLeft()
 {
     pos center = movingBrick[1];
+    for(int i = 0; i < 4; i++)
+    {
+        int l = movingBrick[i].x;
+        int x = -(movingBrick[i].y - center.y) + center.x;
+        int y = (l - center.x) + center.y;
+        if(x < 0 || x >= WIDTH || y < 0 || y >= HEIGHT || field[x + y * WIDTH] != 0) return;
+    }
     for(int i = 0; i < 4; i++)
     {
         int l = movingBrick[i].x;

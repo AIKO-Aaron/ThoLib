@@ -23,6 +23,21 @@ static int timer;
 class Game
 {
 public:
+    void run()
+    {
+        while(true)
+        {
+            std::clock_t start = clock();
+            double duration;
+            
+            // TODO handle input
+            render();
+            
+            duration = (clock() - start ) / (double) CLOCKS_PER_SEC;
+            usleep(1000000 / 60 - duration); // Sleep for 1000/60 milliseconds (60 hertz) & don't wait the time we needed to render & do calculations
+        }
+    }
+    
     virtual void setupGame() = 0;
     virtual void render() = 0;
     virtual void direction_press(int dir) = 0;
