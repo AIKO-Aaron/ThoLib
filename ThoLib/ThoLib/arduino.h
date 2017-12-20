@@ -1,20 +1,29 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <fcntl.h>
+#include <errno.h>
+#include <termios.h>
+
+typedef int arduino;
+
 /*
 returns a file descriptor to the device file of the arduino 
 and does some initialisation
 */
-int openArduino(void);
+arduino openArduino(void);
 
 /*
 closes the file descriptor of the device file of the arduino
 */
-void closeArduino(int arduino);
+void closeArduino(arduino arduino);
 
 /*
 reads a byte from the serial connection (device file) to the arduino
 */
-unsigned char readArduino(int arduino);
+unsigned char readArduino(arduino arduino);
 
 /*
 writes a byte in the serial connection (device file) to the arduino
 */
-void writeArduino(int arduino, unsigned char c);
+void writeArduino(arduino arduino, unsigned char c);

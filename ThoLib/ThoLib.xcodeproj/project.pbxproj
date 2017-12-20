@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		934AF9701FE9882E00389908 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 934AF96F1FE9882E00389908 /* main.cpp */; };
+		9373C7551FEA761B007F5293 /* ThoLib.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9373C7541FEA761B007F5293 /* ThoLib.cpp */; };
+		9373C75A1FEA7B60007F5293 /* arduino.c in Sources */ = {isa = PBXBuildFile; fileRef = 9373C7591FEA7B60007F5293 /* arduino.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -25,6 +27,10 @@
 /* Begin PBXFileReference section */
 		934AF96C1FE9882E00389908 /* ThoLib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = ThoLib; sourceTree = BUILT_PRODUCTS_DIR; };
 		934AF96F1FE9882E00389908 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		9373C7531FEA7609007F5293 /* ThoLib.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ThoLib.h; sourceTree = "<group>"; };
+		9373C7541FEA761B007F5293 /* ThoLib.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ThoLib.cpp; sourceTree = "<group>"; };
+		9373C7571FEA7623007F5293 /* arduino.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = arduino.h; sourceTree = "<group>"; };
+		9373C7591FEA7B60007F5293 /* arduino.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = arduino.c; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,7 +63,11 @@
 		934AF96E1FE9882E00389908 /* ThoLib */ = {
 			isa = PBXGroup;
 			children = (
+				9373C7591FEA7B60007F5293 /* arduino.c */,
+				9373C7571FEA7623007F5293 /* arduino.h */,
 				934AF96F1FE9882E00389908 /* main.cpp */,
+				9373C7531FEA7609007F5293 /* ThoLib.h */,
+				9373C7541FEA761B007F5293 /* ThoLib.cpp */,
 			);
 			path = ThoLib;
 			sourceTree = "<group>";
@@ -120,6 +130,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				934AF9701FE9882E00389908 /* main.cpp in Sources */,
+				9373C75A1FEA7B60007F5293 /* arduino.c in Sources */,
+				9373C7551FEA761B007F5293 /* ThoLib.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

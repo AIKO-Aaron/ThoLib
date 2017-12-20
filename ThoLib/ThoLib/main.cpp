@@ -7,9 +7,11 @@
 //
 
 #include <iostream>
+#include "ThoLib.h"
 #include "arduino.h"
 
+
 int main(int argc, const char * argv[]) {
-    std::cout << "Hello, World!\n";
+    setup();
     return 0;
 }

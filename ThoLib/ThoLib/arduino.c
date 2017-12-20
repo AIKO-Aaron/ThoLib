@@ -1,10 +1,3 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <fcntl.h>
-#include <errno.h>
-#include <termios.h>
-
 #include "arduino.h"
 
 static void error(char *message) {
@@ -12,7 +5,7 @@ static void error(char *message) {
 	exit(EXIT_FAILURE);
 }
 
-extern int openArduino() {
+arduino openArduino() {
 	int fd = open("/dev/ttyACM0", O_RDWR);
 	if(fd == -1)
 		error("error: open");
@@ -54,18 +47,18 @@ extern int openArduino() {
 	return fd;
 }
 
-extern void closeArduino(int arduino) {
+void closeArduino(arduino arduino) {
 	close(arduino);
 }
 
-extern unsigned char readArduino(int arduino) {
+unsigned char readArduino(arduino arduino) {
 	unsigned char touch;
 	if(read(arduino, &touch, sizeof(touch)) == -1)
 		error("error: read");
 	return touch;
 }
 
-extern void writeArduino(int arduino, unsigned char c) {
+void writeArduino(arduino arduino, unsigned char c) {
 	if(write(arduino, &c, sizeof(c)) == -1)
 		error("error: write");
 }
