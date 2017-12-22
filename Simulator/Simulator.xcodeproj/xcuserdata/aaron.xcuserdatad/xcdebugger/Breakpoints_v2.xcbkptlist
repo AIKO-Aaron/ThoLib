@@ -10,13 +10,21 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Simulator/games/tetris.h"
-            timestampString = "535495231.267394"
+            timestampString = "535649304.9228"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "75"
-            endingLineNumber = "75"
+            startingLineNumber = "84"
+            endingLineNumber = "84"
             landmarkName = "newBrick()"
             landmarkType = "9">
+            <Actions>
+               <BreakpointActionProxy
+                  ActionExtensionID = "Xcode.BreakpointAction.DebuggerCommand">
+                  <ActionContent
+                     consoleCommand = "">
+                  </ActionContent>
+               </BreakpointActionProxy>
+            </Actions>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -26,11 +34,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Simulator/games/tetris.h"
-            timestampString = "535495231.267798"
+            timestampString = "535649304.923201"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "116"
-            endingLineNumber = "116"
+            startingLineNumber = "122"
+            endingLineNumber = "122"
             landmarkName = "rotateLeft()"
             landmarkType = "9">
          </BreakpointContent>
@@ -42,11 +50,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Simulator/games/tetris.h"
-            timestampString = "535495231.268078"
+            timestampString = "535649304.923493"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "64"
-            endingLineNumber = "64"
+            startingLineNumber = "73"
+            endingLineNumber = "73"
             landmarkName = "newBrick()"
             landmarkType = "9">
          </BreakpointContent>

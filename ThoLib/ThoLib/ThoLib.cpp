@@ -36,6 +36,8 @@ inline void writePixel(uint8_t x, uint8_t y, int color)
     writeInt(color);
 }
 
+void drawPixel(uint8_t x, uint8_t y, int color) { writePixel(x, y, color); }
+
 void fillRect(uint8_t x, uint8_t y, uint8_t w, uint8_t h, int color)
 {
     for(int i = 0; i < h; i++)

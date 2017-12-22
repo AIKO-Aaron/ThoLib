@@ -16,11 +16,11 @@ typedef struct pos
 
 pos movingBrick[4]; // the moving brick --> all bricks have 4 tiles
 unsigned int field[WIDTH * HEIGHT]; // 15 * 10 --> 150 tiles
-int timer = 0;
+int timer = 0, gameover = 0;
 
 int indexToColor(int index)
 {
-    return ((0x123456 * index) % 0xFFFFFF) | 0x070707;
+    return ((0x123456 * index) % 0xFFFFFF) | 0x101010;
 }
 
 static pos bricks[7][4] = {
@@ -32,6 +32,15 @@ static pos bricks[7][4] = {
     {{WIDTH / 2, 0}, {WIDTH / 2, 1}, {WIDTH / 2 - 1, 1}, {WIDTH / 2 - 1, 2}}, // S
     {{WIDTH / 2 - 1, 0}, {WIDTH / 2, 0}, {WIDTH / 2 - 1, 1}, {WIDTH / 2, 1}} // Square
 };
+
+bool canFallDown(int i)
+{
+    if(i % WIDTH != 0 && field[i - 1] == field[i] && (i / WIDTH + 1 <= HEIGHT && field[i - 1 + WIDTH])) return false;
+    if(i % WIDTH != WIDTH - 1 && field[i + 1] == field[i] && (i / WIDTH + 1 <= HEIGHT && field[i + 1 + WIDTH])) return false;
+    if(i / WIDTH != 0 && field[i - WIDTH] == field[i]) return canFallDown(i - WIDTH);
+    
+    return true;
+}
 
 void newBrick()
 {
@@ -63,7 +72,7 @@ void newBrick()
             if(field[i] == 0) continue; // No brick that could fall down...
             if(i / WIDTH != HEIGHT - 1 && field[i + WIDTH] == 0) // Below brick is free
             {
-                if(i % WIDTH != 0 && field[i - 1] != field[i] && i % WIDTH != WIDTH - 1 && field[i + 1] != field[i] && i / WIDTH != 0 && field[i - WIDTH] != field[i])
+                if(canFallDown(i))
                 {
                     field[i + WIDTH] = field[i];
                     field[i] = 0;
@@ -77,13 +86,10 @@ void newBrick()
         movingBrick[i] = p[i];
         if(field[movingBrick[i].x + movingBrick[i].y * WIDTH] != 0)
         {
-            currentIndex = 0;
-            for(int i = 0; i < WIDTH * HEIGHT; i++) field[i] = 0;
-            usleep(1000 * 2000);
-            memset(movingBrick, 0, sizeof(pos) * 4);
-            pos* p = bricks[rand() % 7];
-            for(int i = 0; i < 4; i++) movingBrick[i] = p[i];
+            // usleep(1000 * 2000); // sleep 2 seconds
+            if(!gameover) gameover = 120;
             std::cout << "Game over...." << std::endl;
+            return;
         }
     }
 }
@@ -133,16 +139,30 @@ void setupGame()
 
 void render()
 {
+    if(gameover) --gameover;
+    
     for(int i = 0; i < WIDTH * HEIGHT; i++)
     {
-        drawPixel(i % WIDTH, i / WIDTH, field[i] == 0 ? 0x000000 : indexToColor(field[i]));
+        if(gameover > 0)
+        {
+            drawPixel(i % WIDTH, i / WIDTH, ((gameover / 10) % 2 == 1) ? (field[i] == 0 ? 0x000000 : indexToColor(field[i])) : 0x000000);
+            if(gameover == 1)
+            {
+                for(int i = 0; i < WIDTH * HEIGHT; i++) field[i] = 0;
+                pos* p = bricks[rand() % 7];
+                for(int i = 0; i < 4; i++) movingBrick[i] = p[i];
+            }
+        }
+        else drawPixel(i % WIDTH, i / WIDTH, field[i] == 0 ? 0x000000 : indexToColor(field[i]));
     }
+    
+    
     for(int i = 0; i < 4; i++)
     {
         drawPixel(movingBrick[i].x, movingBrick[i].y, indexToColor(currentIndex + 1));
     }
     
-    if(++timer >= TIME)
+    if(++timer >= TIME && !gameover)
     {
         timer = 0;
         bool couldMove = true;
@@ -166,6 +186,7 @@ void render()
 
 void direction_press(int dir)
 {
+    if(gameover) return;
     if(dir == KEY_RIGHT)
     {
         for(int i = 0; i < 4; i++)
@@ -193,10 +214,12 @@ void direction_press(int dir)
 
 void a_press()
 {
+    if(gameover) return;
     rotateRight();
 }
 
 void b_press()
 {
+    if(gameover) return;
     rotateLeft();
 }
