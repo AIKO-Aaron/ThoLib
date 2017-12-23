@@ -1,17 +1,17 @@
 CC = g++
-FLAGS = -O2 --std=c++11 -I${CURDIR} -I${CURDIR}/games -Wwritable-strings
+FLAGS = -O2 --std=c++11 -I${CURDIR} -I${CURDIR}/games
 LDFLAGS = -o tholib
 
-all: main.o Snake.o Tetris.o Flappy.o arduino.o tholib.o
+all: main.o Snake.o Tetris.o Flappy.o arduino.o ThoLib.o
 	$(CC) $(LDFLAGS) $^
 
 main.o: main.cpp
 	$(CC) -c $(FLAGS) $<
 
-arduino.o: Arduino.cpp
+arduino.o: arduino.cpp
 	$(CC) -c $(FLAGS) $<
 
-tholib.o: tholib.cpp
+ThoLib.o: ThoLib.cpp
 	$(CC) -c $(FLAGS) $<
 
 include games/Makefile
@@ -19,3 +19,4 @@ include games/Makefile
 clean:
 	rm -rf *.o
 	rm -rf games/*.o
+	rm tholib

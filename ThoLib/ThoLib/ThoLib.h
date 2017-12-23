@@ -20,6 +20,8 @@
 #define WIDTH 15
 #define HEIGHT 10
 
+typedef unsigned char uint8_t;
+
 void setup();
 
 void writeInt(int a);
