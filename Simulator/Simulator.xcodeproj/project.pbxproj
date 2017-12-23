@@ -27,6 +27,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		933E06781FEE9FF600037515 /* flappy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = flappy.h; sourceTree = "<group>"; };
 		9373C73C1FE9DDA3007F5293 /* Simulator */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Simulator; sourceTree = BUILT_PRODUCTS_DIR; };
 		9373C7461FE9DEB8007F5293 /* SDL2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2.framework; path = sdl/SDL2.framework; sourceTree = SOURCE_ROOT; };
 		9373C7481FE9DF07007F5293 /* window.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = window.h; sourceTree = "<group>"; };
@@ -87,6 +88,7 @@
 		9373C75E1FEA9B8E007F5293 /* games */ = {
 			isa = PBXGroup;
 			children = (
+				933E06781FEE9FF600037515 /* flappy.h */,
 				9373C75F1FEA9B9C007F5293 /* snake.h */,
 				9373C7601FEA9BBF007F5293 /* tetris.h */,
 			);

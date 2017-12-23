@@ -16,6 +16,8 @@ float seed;
 #define TIME 60/3
 #define PIPE_DISTANCE 7
 
+// #define UNDYING
+
 float chaos(float i)
 {
 	return 4.0 * i * (1.0 - i);
@@ -23,7 +25,7 @@ float chaos(float i)
 
 void srandom_int(float s) 
 {
-	seed = s / (float) 0xFFFFFF;
+	seed = s / (float) RAND_MAX;
 }
 
 int random_int(int min, int max, int p)
@@ -33,7 +35,7 @@ int random_int(int min, int max, int p)
 	{
 		ret = chaos(ret);
 	}
-	return (int)(0xFFFFFF * ret) % max + min;
+	return ((int)(0xFFFFFF * ret) % max) + min;
 }
 
 
@@ -42,7 +44,7 @@ float yvelocity = 0, y = HEIGHT / 2;
 
 void setupGame()
 {
-	srand(time(NULL));
+	srand((int) time(NULL));
 	srandom_int(rand());
 }
 
@@ -68,6 +70,11 @@ void render()
 			dead = true;
 		}
 	}
+    
+#ifdef UNDYING
+    dead = false;
+#endif
+    
 	if (dead)
 	{
 		std::cout << "Dead" << std::endl;
@@ -82,7 +89,7 @@ void render()
 
 	for (int i = offset; i < WIDTH; i += PIPE_DISTANCE)
 	{
-		int ri = random_int(1, HEIGHT - 2, currentFrontPipe + (i - offset) / PIPE_DISTANCE);
+		int ri = random_int(2, HEIGHT - 4, currentFrontPipe + (i - offset) / PIPE_DISTANCE);
 		drawVerticalLine(i, 0, ri, 0xFF00FF);
 		drawVerticalLine(i, ri + 3, HEIGHT - 3 - ri, 0xFF00FF);
 	}

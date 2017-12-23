@@ -18,7 +18,7 @@ float chaos(float i)
 
 void srandom_int(float s)
 {
-    seed = s / (float) 0xFFFFFF;
+    seed = s / (float) RAND_MAX;
 }
 
 int random_int(int min, int max, int p)
