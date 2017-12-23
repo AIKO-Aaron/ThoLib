@@ -9,7 +9,7 @@
 #include <iostream>
 #include "ThoLib.h"
 #include "arduino.h"
-#include "Game.h"
+#include "games/Game.h"
 
 
 int main(int argc, const char * argv[]) {

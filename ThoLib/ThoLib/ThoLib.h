@@ -24,7 +24,13 @@ void setup();
 
 void writeInt(int a);
 
-void drawPixel(uint8_t x, uint8_t y, int color);
+inline void drawPixel(uint8_t x, uint8_t y, int color)
+{
+    color &= 0x00FFFFFF; // Clear alpha bit
+    color |= (x & 0x0F) << 24 | (y & 0x0F) << 28;
+    writeInt(color);
+}
+
 void drawVerticalLine(uint8_t x, uint8_t y, uint8_t length, int color);
 void drawHorizontalLine(uint8_t x, uint8_t y, uint8_t length, int color);
 

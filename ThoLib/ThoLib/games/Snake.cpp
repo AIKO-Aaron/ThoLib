@@ -6,7 +6,7 @@
 //  Copyright © 2017 Aaron Hodel. All rights reserved.
 //
 
-#include "Game.h"
+#include "./Game.h"
 
 #define TIME 60/6
 
