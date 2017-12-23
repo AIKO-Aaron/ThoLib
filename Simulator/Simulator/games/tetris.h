@@ -1,7 +1,6 @@
-#include "game.h"
+#include "../game.h"
 #include <iostream>
 #include <vector>
-#include <unistd.h>
 
 #define TIME 60 / 2
 

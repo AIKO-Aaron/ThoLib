@@ -149,6 +149,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="game.h" />
+    <ClInclude Include="games\flappy.h" />
+    <ClInclude Include="games\snake.h" />
+    <ClInclude Include="games\tetris.h" />
     <ClInclude Include="util.h" />
     <ClInclude Include="window.h" />
   </ItemGroup>

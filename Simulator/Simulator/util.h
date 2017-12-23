@@ -7,3 +7,5 @@ void fillEllipse(int x, int y, int a, int b, int color);
 
 void drawRect(int x, int y, int w, int h, int color);
 void drawEllipse(int x, int y, int a, int b, int color);
+void drawHorizontalLine(int x, int y, int length, int color);
+void drawVerticalLine(int x, int y, int length, int color);

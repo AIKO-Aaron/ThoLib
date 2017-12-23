@@ -8,6 +8,16 @@ void drawPixel(int x, int y, int color)
 	if (x >= 0 && x < WIDTH && y >= 0 && y < HEIGHT && pixels != NULL) pixels[posToIndex(x, y)] = color;
 }
 
+void drawVerticalLine(int x, int y, int length, int color)
+{
+	for (int i = y; i < y + length; i++) drawPixel(x, i, color);
+}
+
+void drawHorizontalLine(int x, int y, int length, int color)
+{
+	for (int i = x; i < x + length; i++) drawPixel(i, y, color);
+}
+
 void fillRect(int x, int y, int w, int h, int color)
 {
     for (int i = 0; i < h; i++)

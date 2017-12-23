@@ -38,5 +38,14 @@
     <ClInclude Include="util.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
+    <ClInclude Include="games\snake.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="games\tetris.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
+    <ClInclude Include="games\flappy.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
