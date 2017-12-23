@@ -66,4 +66,13 @@ class Tetris : public Game
     void b_press() override;
 };
 
+class Flappy : public Game
+{
+    void setupGame() override;
+    void render() override;
+    void direction_press(int dir) override;
+    void a_press() override;
+    void b_press() override;
+};
+
 #endif /* Game_h */

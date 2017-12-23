@@ -29,14 +29,12 @@ void writeInt(int a)
     }
 }
 
-inline void writePixel(uint8_t x, uint8_t y, int color)
+inline void drawPixel(uint8_t x, uint8_t y, int color)
 {
     color &= 0x00FFFFFF; // Clear alpha bit
     color |= (x & 0x0F) << 24 | (y & 0x0F) << 28;
     writeInt(color);
 }
-
-void drawPixel(uint8_t x, uint8_t y, int color) { writePixel(x, y, color); }
 
 void fillRect(uint8_t x, uint8_t y, uint8_t w, uint8_t h, int color)
 {
@@ -44,7 +42,17 @@ void fillRect(uint8_t x, uint8_t y, uint8_t w, uint8_t h, int color)
     {
         for(int j = 0; j < w; j++)
         {
-            writePixel(x + j, y + i, color);
+            drawPixel(x + j, y + i, color);
         }
     }
+}
+
+void drawVerticalLine(uint8_t x, uint8_t y, uint8_t length, int color)
+{
+    for (int i = y; i < y + length; i++) drawPixel(x, i, color);
+}
+
+void drawHorizontalLine(uint8_t x, uint8_t y, uint8_t length, int color)
+{
+    for (int i = x; i < x + length; i++) drawPixel(i, y, color);
 }

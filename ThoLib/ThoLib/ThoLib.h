@@ -23,7 +23,10 @@
 void setup();
 
 void writeInt(int a);
-void writePixel(uint8_t x, uint8_t y, int color);
+
+void drawPixel(uint8_t x, uint8_t y, int color);
+void drawVerticalLine(uint8_t x, uint8_t y, uint8_t length, int color);
+void drawHorizontalLine(uint8_t x, uint8_t y, uint8_t length, int color);
 
 void fillRect(uint8_t x, uint8_t y, uint8_t w, uint8_t h, int color);
 

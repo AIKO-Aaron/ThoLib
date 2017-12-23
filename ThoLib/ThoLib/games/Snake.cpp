@@ -22,7 +22,7 @@ void Snake::render()
     
     for(int i = 0; i < currentSnake.size(); i++)
     {
-        writePixel(currentSnake[i].x, currentSnake[i].y, 0xFF00FF);
+        drawPixel(currentSnake[i].x, currentSnake[i].y, 0xFF00FF);
     }
     
     if(timer++ >= TIME)
@@ -53,7 +53,7 @@ void Snake::render()
         }
     }
     
-    writePixel(foodpos.x, foodpos.y, 0xFF0000);
+    drawPixel(foodpos.x, foodpos.y, 0xFF0000);
 }
 
 void Snake::direction_press(int dir)

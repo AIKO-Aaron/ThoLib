@@ -138,7 +138,7 @@ void Tetris::render()
     {
         if(gameover > 0)
         {
-            writePixel(i % WIDTH, i / WIDTH, ((gameover / 10) % 2 == 1) ? (field[i] == 0 ? 0x000000 : indexToColor(field[i])) : 0x000000);
+            drawPixel(i % WIDTH, i / WIDTH, ((gameover / 10) % 2 == 1) ? (field[i] == 0 ? 0x000000 : indexToColor(field[i])) : 0x000000);
             if(gameover == 1)
             {
                 for(int i = 0; i < WIDTH * HEIGHT; i++) field[i] = 0;
@@ -146,13 +146,13 @@ void Tetris::render()
                 for(int i = 0; i < 4; i++) movingBrick[i] = p[i];
             }
         }
-        else writePixel(i % WIDTH, i / WIDTH, field[i] == 0 ? 0x000000 : indexToColor(field[i]));
+        else drawPixel(i % WIDTH, i / WIDTH, field[i] == 0 ? 0x000000 : indexToColor(field[i]));
     }
     
     
     for(int i = 0; i < 4; i++)
     {
-        writePixel(movingBrick[i].x, movingBrick[i].y, indexToColor(currentIndex + 1));
+        drawPixel(movingBrick[i].x, movingBrick[i].y, indexToColor(currentIndex + 1));
     }
     
     if(++timer >= TIME && !gameover)
