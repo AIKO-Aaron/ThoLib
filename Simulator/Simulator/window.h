@@ -3,7 +3,12 @@
 #ifndef WINDOW_H
 #define WINDOW_H
 
-#include "SDL.h"
+#ifdef __linux__ 
+    #include <SDL2/SDL.h>
+#else
+	 #include "SDL.h"
+#endif
+
 #include "util.h"
 #include <iostream>
 
