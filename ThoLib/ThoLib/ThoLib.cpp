@@ -15,17 +15,17 @@ arduino teensy;
 void setup()
 {
     std::cout << "Setting up arduino..." << std::endl;
-    teensy = openArduino();
+    teensy = openArduino(); // Try to open interface to arduino....
     
-    writeInt(0xDDCCBBAA);
-    while(readArduino(teensy) != 0x0A) usleep(10000);
+    writeInt(0xDDCCBBAA); // Write "I'm here to arduino"
+    while(readArduino(teensy) != 0x0A) usleep(10000); // Wait for arduino to acknowledge that I'm here
 }
 
 void writeInt(int a)
 {
     for(int i = 0; i < 4; i++)
     {
-        writeArduino(teensy, a >> (8 * i));
+        writeArduino(teensy, a >> (8 * i)); // Write each byte...
     }
 }
 
@@ -35,17 +35,17 @@ void fillRect(uint8_t x, uint8_t y, uint8_t w, uint8_t h, int color)
     {
         for(int j = 0; j < w; j++)
         {
-            drawPixel(x + j, y + i, color);
+            drawPixel(x + j, y + i, color); // For each pixel in the rect --> draw pixel
         }
     }
 }
 
 void drawVerticalLine(uint8_t x, uint8_t y, uint8_t length, int color)
 {
-    for (int i = y; i < y + length; i++) drawPixel(x, i, color);
+    for (int i = y; i < y + length; i++) drawPixel(x, i, color); // For each pixel in the line --> draw pixel
 }
 
 void drawHorizontalLine(uint8_t x, uint8_t y, uint8_t length, int color)
 {
-    for (int i = x; i < x + length; i++) drawPixel(i, y, color);
+    for (int i = x; i < x + length; i++) drawPixel(i, y, color); // For each pixel in the line --> draw pixel
 }

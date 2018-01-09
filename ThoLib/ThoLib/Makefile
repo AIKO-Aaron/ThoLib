@@ -2,13 +2,16 @@ CC = g++
 FLAGS = -O2 --std=c++11 -I${CURDIR} -I${CURDIR}/games
 LDFLAGS = -o tholib
 
-all: main.o Snake.o Tetris.o Flappy.o arduino.o ThoLib.o
+all: main.o Snake.o Tetris.o Flappy.o arduino.o Input.o ThoLib.o
 	$(CC) $(LDFLAGS) $^
 
 main.o: main.cpp
 	$(CC) -c $(FLAGS) $<
 
 arduino.o: arduino.cpp
+	$(CC) -c $(FLAGS) $<
+
+Input.o: Input.cpp
 	$(CC) -c $(FLAGS) $<
 
 ThoLib.o: ThoLib.cpp

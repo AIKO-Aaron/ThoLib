@@ -11,16 +11,19 @@ float seed;
 #define TIME 60/3
 #define PIPE_DISTANCE 7
 
+// Chaos function for random
 float chaos(float i)
 {
     return 4.0 * i * (1.0 - i);
 }
 
+// Set a random seed
 void srandom_int(float s)
 {
     seed = s / (float) RAND_MAX;
 }
 
+// Use seed as starting value & retrieve random value from iterating chaos function
 int random_int(int min, int max, int p)
 {
     float ret = seed;

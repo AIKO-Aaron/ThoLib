@@ -41,11 +41,12 @@
 #include <vector>
 #include <ctime>
 
+// Position is a vector --> store x & y
 typedef struct pos
 {
     int x, y;
 } pos;
-static int timer;
+static int timer; // A timer which just counts up...
 
 class Game
 {
@@ -58,6 +59,7 @@ public:
     virtual void a_press() = 0;
     virtual void b_press() = 0;
     
+    // Run the game --> 60Hz clock
     void run()
     {
         running = false;

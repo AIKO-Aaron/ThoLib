@@ -14,11 +14,12 @@
 #define KEY_LEFT 2
 #define KEY_UP 3
 
+// Combined information of the controller state
 typedef struct {
     int direction_press;
     bool a_press, b_press;
 } userInput;
 
-userInput getUserInput();
+userInput getUserInput(); // Retrieve the current controller state
 
 #endif /* Input_h */

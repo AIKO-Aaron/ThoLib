@@ -1,30 +1,30 @@
 #include "arduino.h"
+#include <string>
 
-static void error(char *message) {
-	perror(message);
+
+static void error(std::string message) {
+	perror(message.c_str());
 	exit(EXIT_FAILURE);
 }
 
 arduino openArduino() {
 	int fd = open("/dev/ttyACM0", O_RDWR);
-	if(fd == -1)
-		error("error: open");
+	if(fd == -1) error("error: open");
 	
 	//do some initialisation
 	struct termios toptions;
 	//get the attributes
-	if (tcgetattr(fd, &toptions) == -1)
-        	error("error: get attriubutes");
+	if (tcgetattr(fd, &toptions) == -1) error("error: get attriubutes");
 	
 	//set baudrate
 	speed_t brate = B9600;
 	cfsetispeed(&toptions, brate);
-    	cfsetospeed(&toptions, brate);
+    cfsetospeed(&toptions, brate);
 
 	// 8N1
-    	toptions.c_cflag &= ~PARENB;
-    	toptions.c_cflag &= ~CSTOPB;
-    	toptions.c_cflag &= ~CSIZE;
+    toptions.c_cflag &= ~PARENB;
+    toptions.c_cflag &= ~CSTOPB;
+    toptions.c_cflag &= ~CSIZE;
 	toptions.c_cflag |= CS8;
 	
 	// no flow control
@@ -41,8 +41,7 @@ arduino openArduino() {
 	toptions.c_cc[VTIME] = 0;
 	
 	//set the attributes
-	if(tcsetattr(fd, TCSANOW, &toptions) == -1)
-		error("error: set attriubutes");
+	if(tcsetattr(fd, TCSANOW, &toptions) == -1) error("error: set attriubutes");
 	
 	return fd;
 }
@@ -53,12 +52,10 @@ void closeArduino(arduino arduino) {
 
 unsigned char readArduino(arduino arduino) {
 	unsigned char touch;
-	if(read(arduino, &touch, sizeof(touch)) == -1)
-		error("error: read");
+	if(read(arduino, &touch, sizeof(touch)) == -1) error("error: read");
 	return touch;
 }
 
 void writeArduino(arduino arduino, unsigned char c) {
-	if(write(arduino, &c, sizeof(c)) == -1)
-		error("error: write");
+	if(write(arduino, &c, sizeof(c)) == -1) error("error: write");
 }
