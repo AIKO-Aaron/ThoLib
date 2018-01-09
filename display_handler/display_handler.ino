@@ -32,7 +32,7 @@ void loop() {
         case 0xFFFFFF: // reset (NYI)
           break;
         case 0x00DEAD:
-          memset(leds, NUM_LEDS * 4, 0);
+          memset(leds, 0, NUM_LEDS * 4);
         default:
           break;
       }
