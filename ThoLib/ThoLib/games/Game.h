@@ -79,6 +79,7 @@ public:
             
             duration = (clock() - start) / (double) CLOCKS_PER_SEC;
             usleep(1000000 / 60 - duration); // Sleep for 1000/60 milliseconds (60 hertz) & don't wait the time we needed to render & do calculations
+            read();
         }
     }
 };

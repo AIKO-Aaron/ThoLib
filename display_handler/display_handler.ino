@@ -7,7 +7,7 @@
 #define NUM_LEDS 450
 
 CRGB leds[NUM_LEDS];
-uint32_t setup_input;
+uint32_t setup_input = 0;
 
 #define WRITE_COLOR(x, y, color) leds[y * WIDTH + (y % 2 == 1 ? WIDTH - x - 1 : x)] = color
 
@@ -17,14 +17,14 @@ void setup() {
 }
 
 void loop() {
-  if (setup_input == 0xC0FFEEAA) {
+  if (setup_input == 0x30313233) {
     uint32_t input = Serial.read() | Serial.read() << 8 | Serial.read() << 16;
     uint8_t pos = Serial.read();
     
     uint8_t x = pos & 0x0F;
     uint8_t y = pos >> 4;
 
-    if(x == -1 && y == -1)
+    if(x == 0xF && y == 0xF)
     {
       //Special treatment
       switch(input)
@@ -38,12 +38,15 @@ void loop() {
       }
     }
     else WRITE_COLOR(x, y, input);
+
+    Serial.print("Received: ");
+    Serial.println(input, HEX);
     
-    FastLED.show(); // Update display...
+    // FastLED.show(); // Update display...
   } else {
-    setup_input = (setup_input >> 8) | (Serial.read() << 24); // append last byte, only changed here
-    if (setup_input == 0xDDCCBBAA) {
-      Serial.print(0x0A); // Acknowledge existence of raspi
-    }
+    setup_input = (setup_input >> 8) | ((uint32_t) Serial.read() << 24); // append last byte, only changed here
+    if (setup_input == 0x30313233) {
+      Serial.print('A'); // Acknowledge existence of raspi
+    } else Serial.println(setup_input);
   }
 }

@@ -31,6 +31,8 @@ userInput getUserInput()
 {
     // TODO handle input
     
+    
+    
     /**
      // Everything is boolean!
      int ud = up - down;

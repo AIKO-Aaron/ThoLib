@@ -17,9 +17,13 @@ void setup()
     std::cout << "Setting up arduino..." << std::endl;
     teensy = openArduino(); // Try to open interface to arduino....
     
-    writeInt(0xC0FFEEAA); // Write "I'm here, waiting" to arduino
+    writeInt(0x30313233); // Write "I'm here, waiting" to arduino
 #ifndef DEBUG_NO_CRASH
-    while(readArduino(teensy) != 0x0A) usleep(10000); // Wait for arduino to acknowledge that I'm here
+    while(readArduino(teensy) != 0x41)
+    {
+        writeInt(0x30313233); // Wait for arduino to acknowledge that I'm here
+        usleep(10000); // necessary...
+    }
 #endif
 }
 
@@ -31,6 +35,11 @@ void clearScreen()
 void reset()
 {
     sendCommand(0xFFFFFF); // -1 --> reset
+}
+
+void read()
+{
+    readArduino(teensy);
 }
 
 void writeInt(int a)
@@ -54,10 +63,12 @@ void fillRect(uint8_t x, uint8_t y, uint8_t w, uint8_t h, int color)
 
 void drawVerticalLine(uint8_t x, uint8_t y, uint8_t length, int color)
 {
+    if(length <= 0 || length >= HEIGHT) return;
     for (int i = y; i < y + length; i++) drawPixel(x, i, color); // For each pixel in the line --> draw pixel
 }
 
 void drawHorizontalLine(uint8_t x, uint8_t y, uint8_t length, int color)
 {
+    if(length <= 0 || length >= HEIGHT) return;
     for (int i = x; i < x + length; i++) drawPixel(i, y, color); // For each pixel in the line --> draw pixel
 }

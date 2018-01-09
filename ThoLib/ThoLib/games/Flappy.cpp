@@ -46,7 +46,7 @@ void Flappy::setupGame()
 }
 
 void Flappy::render()
-{
+{    
     if (++timer >= TIME)
     {
         timer = 0;
@@ -57,7 +57,6 @@ void Flappy::render()
             std::cout << "Next pipe..." << std::endl;
         }
     }
-    
     bool dead = y < 0 || y >= HEIGHT;
     if (offset == 2)
     {
@@ -71,7 +70,7 @@ void Flappy::render()
 #ifdef UNDYING
     dead = false;
 #endif
-    
+    std::cout.flush();
     if (dead)
     {
         std::cout << "Dead" << std::endl;
@@ -83,15 +82,13 @@ void Flappy::render()
     
     yvelocity += SPEED;
     y += yvelocity;
-    
-    for (int i = offset; i < offset + WIDTH; i += PIPE_DISTANCE)
+    for (int i = offset; i < WIDTH; i += PIPE_DISTANCE)
     {
         int ri = random_int(2, HEIGHT - TOP_BOTTOM, currentFrontPipe + (i - offset) / PIPE_DISTANCE);
         drawVerticalLine(i, 0, ri, 0xFF00FF);
         drawVerticalLine(i, ri + 3, HEIGHT - 3 - ri, 0xFF00FF);
         drawVerticalLine(i, ri, 3, 0xFFFFFF);
     }
-    
     drawPixel(2, y, 0xFFFF00);
 }
 

@@ -1,5 +1,6 @@
 #include "arduino.h"
 #include <string>
+#include <iostream>
 
 static void error(std::string message) {
 #ifndef DEBUG_NO_CRASH
@@ -9,7 +10,11 @@ static void error(std::string message) {
 }
 
 arduino openArduino() {
+#ifdef __linux__
 	int fd = open("/dev/ttyACM0", O_RDWR);
+#elif defined(__APPLE__)
+    int fd = open("/dev/cu.usbmodem1421", O_RDWR);
+#endif
 	if(fd == -1) error("error: open");
 	
 	//do some initialisation
@@ -54,6 +59,7 @@ void closeArduino(arduino arduino) {
 unsigned char readArduino(arduino arduino) {
 	unsigned char touch;
 	if(read(arduino, &touch, sizeof(touch)) == -1) error("error: read");
+    std::cout << touch << std::endl;
 	return touch;
 }
 

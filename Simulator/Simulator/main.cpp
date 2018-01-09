@@ -1,7 +1,6 @@
 #include <iostream>
 #include <time.h>
 
-
 #include "game.h"
 
 int main(int argc, char **args)
