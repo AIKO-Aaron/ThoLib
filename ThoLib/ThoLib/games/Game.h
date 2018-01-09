@@ -18,7 +18,7 @@
 
 typedef struct pos
 {
-    int x, y;    
+    int x, y;
 } pos;
 static int timer;
 
@@ -38,6 +38,11 @@ public:
             std::clock_t start = clock();
             double duration;
             
+            userInput input = getUserInput();
+            direction_press(input.direction_press);
+            if(input.a_press) a_press();
+            if(input.b_press) b_press();
+
             // TODO handle input
             render();
             
