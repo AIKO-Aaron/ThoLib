@@ -74,6 +74,7 @@ public:
             if(input.b_press) b_press();
 
             // TODO handle input
+            clearScreen();
             render();
             
             duration = (clock() - start) / (double) CLOCKS_PER_SEC;
