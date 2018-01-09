@@ -65,7 +65,7 @@ void render()
 
 void direction_press(int dir)
 {
-    if(direction % 2 == dir % 2)
+    if(direction % 2 == dir % 2 && direction != dir)
     {
         currentSnake.clear();
         direction = 0;

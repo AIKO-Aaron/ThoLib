@@ -15,7 +15,7 @@
 int main(int argc, const char * argv[]) {
     setup();
     
-    // Instantiate game snake & run
+    // Instantiate game snake & run it
     Game *game = new Snake();
     game->run();
     

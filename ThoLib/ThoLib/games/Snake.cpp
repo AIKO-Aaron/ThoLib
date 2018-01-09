@@ -58,7 +58,7 @@ void Snake::render()
 
 void Snake::direction_press(int dir)
 {
-    if(direction % 2 == dir % 2)
+    if(direction % 2 == dir % 2 && direction != dir)
     {
         currentSnake.clear();
         direction = 0;

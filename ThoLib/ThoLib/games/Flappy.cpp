@@ -10,6 +10,7 @@ float seed;
 #define JUMP_POWER 0.01
 #define TIME 60/3
 #define PIPE_DISTANCE 7
+#define TOP_BOTTOM 4
 
 // Chaos function for random
 float chaos(float i)
@@ -38,13 +39,13 @@ int random_int(int min, int max, int p)
 int currentFrontPipe = 0, offset = WIDTH;
 float yvelocity = 0, y = HEIGHT / 2;
 
-void Flappy::setupGame()
+void setupGame()
 {
     srand((int) time(NULL));
     srandom_int(rand());
 }
 
-void Flappy::render()
+void render()
 {
     if (++timer >= TIME)
     {
@@ -60,12 +61,17 @@ void Flappy::render()
     bool dead = y < 0 || y >= HEIGHT;
     if (offset == 2)
     {
-        int ri = random_int(1, HEIGHT - 2, currentFrontPipe);
-        if (y < ri || y > ri + 2)
+        int ri = random_int(2, HEIGHT - TOP_BOTTOM, currentFrontPipe);
+        if (y < ri || y > ri + 3)
         {
             dead = true;
         }
     }
+    
+#ifdef UNDYING
+    dead = false;
+#endif
+    
     if (dead)
     {
         std::cout << "Dead" << std::endl;
@@ -78,29 +84,32 @@ void Flappy::render()
     yvelocity += SPEED;
     y += yvelocity;
     
-    for (int i = offset; i < WIDTH; i += PIPE_DISTANCE)
+    for (int i = offset; i < offset + WIDTH; i += PIPE_DISTANCE)
     {
-        int ri = random_int(1, HEIGHT - 2, currentFrontPipe + (i - offset) / PIPE_DISTANCE);
+        int ri = random_int(2, HEIGHT - TOP_BOTTOM, currentFrontPipe + (i - offset) / PIPE_DISTANCE);
         drawVerticalLine(i, 0, ri, 0xFF00FF);
         drawVerticalLine(i, ri + 3, HEIGHT - 3 - ri, 0xFF00FF);
+        drawVerticalLine(i, ri, 3, 0xFFFFFF);
     }
     
     drawPixel(2, y, 0xFFFF00);
 }
 
-void Flappy::direction_press(int dir)
+void direction_press(int dir)
 {
     // if (dir == KEY_UP) y--;
     // if (dir == KEY_DOWN) y++;
 }
 
-void Flappy::a_press()
+void a_press()
 {
     // jump
     if(yvelocity >= -JUMP_POWER * 10) yvelocity = -JUMP_POWER * 10;
     else yvelocity -= JUMP_POWER;
 }
 
-void Flappy::b_press() {}
+void b_press() {}
+
+
 
 

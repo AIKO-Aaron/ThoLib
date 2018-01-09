@@ -12,7 +12,7 @@
  HOW TO ADD GAMES
  ################
  
- 1. Create new class in here --> copy one and rename to your name
+ 1. Create new class in here --> copy preset and rename it to the name of your game
  2. Create implementation in new .cpp (Don't forget to add to compiled files)
  3. Functions to implement:
     - setupGame() --> called once at instantiation of game
@@ -81,6 +81,22 @@ public:
         }
     }
 };
+
+// Game definitions
+
+/**
+ Preset:
+ 
+ class <NAME> : public Game
+ {
+ void render() override;
+ void direction_press(int dir) override;
+ void setupGame() override {}
+ void a_press() override {}
+ void b_press() override {}
+ };
+ 
+ */
 
 class Snake : public Game
 {

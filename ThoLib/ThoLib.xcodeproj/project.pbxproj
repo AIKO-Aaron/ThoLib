@@ -76,11 +76,11 @@
 				9373C75B1FEA7F20007F5293 /* games */,
 				9373C7591FEA7B60007F5293 /* arduino.cpp */,
 				9373C7571FEA7623007F5293 /* arduino.h */,
-				934AF96F1FE9882E00389908 /* main.cpp */,
 				9373C7531FEA7609007F5293 /* ThoLib.h */,
 				9373C7541FEA761B007F5293 /* ThoLib.cpp */,
 				93F5D97F2004A48000EC2587 /* Input.cpp */,
 				93F5D9802004A48000EC2587 /* Input.h */,
+				934AF96F1FE9882E00389908 /* main.cpp */,
 			);
 			path = ThoLib;
 			sourceTree = "<group>";
