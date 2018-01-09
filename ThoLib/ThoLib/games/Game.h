@@ -46,7 +46,7 @@ typedef struct pos
 {
     int x, y;
 } pos;
-static int timer; // A timer which just counts up...
+static int timer; // A timer (for convinience in the games, because they all have a global timer variable)
 
 class Game
 {
@@ -62,7 +62,7 @@ public:
     // Run the game --> 60Hz clock
     void run()
     {
-        running = false;
+        running = true;
         while(running)
         {
             std::clock_t start = clock();

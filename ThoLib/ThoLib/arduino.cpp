@@ -1,10 +1,11 @@
 #include "arduino.h"
 #include <string>
 
-
 static void error(std::string message) {
+#ifndef DEBUG_NO_CRASH
 	perror(message.c_str());
 	exit(EXIT_FAILURE);
+#endif
 }
 
 arduino openArduino() {

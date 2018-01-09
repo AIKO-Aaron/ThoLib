@@ -39,13 +39,13 @@ int random_int(int min, int max, int p)
 int currentFrontPipe = 0, offset = WIDTH;
 float yvelocity = 0, y = HEIGHT / 2;
 
-void setupGame()
+void Flappy::setupGame()
 {
     srand((int) time(NULL));
     srandom_int(rand());
 }
 
-void render()
+void Flappy::render()
 {
     if (++timer >= TIME)
     {
@@ -95,20 +95,20 @@ void render()
     drawPixel(2, y, 0xFFFF00);
 }
 
-void direction_press(int dir)
+void Flappy::direction_press(int dir)
 {
     // if (dir == KEY_UP) y--;
     // if (dir == KEY_DOWN) y++;
 }
 
-void a_press()
+void Flappy::a_press()
 {
     // jump
     if(yvelocity >= -JUMP_POWER * 10) yvelocity = -JUMP_POWER * 10;
     else yvelocity -= JUMP_POWER;
 }
 
-void b_press() {}
+void Flappy::b_press() {}
 
 
 

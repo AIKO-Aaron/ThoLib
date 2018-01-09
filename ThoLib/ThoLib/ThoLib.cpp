@@ -18,7 +18,9 @@ void setup()
     teensy = openArduino(); // Try to open interface to arduino....
     
     writeInt(0xDDCCBBAA); // Write "I'm here, waiting" to arduino
+#ifndef DEBUG_NO_CRASH
     while(readArduino(teensy) != 0x0A) usleep(10000); // Wait for arduino to acknowledge that I'm here
+#endif
 }
 
 void clearScreen()
