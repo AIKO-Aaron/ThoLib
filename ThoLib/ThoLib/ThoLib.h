@@ -12,11 +12,6 @@
 #include <stdlib.h>
 #include "arduino.h"
 
-#define KEY_RIGHT 0
-#define KEY_DOWN 1
-#define KEY_LEFT 2
-#define KEY_UP 3
-
 #define WIDTH 15
 #define HEIGHT 10
 

@@ -19,7 +19,7 @@ int timer = 0, gameover = 0;
 
 int indexToColor(int index)
 {
-    return ((0x123456 * index) % 0xFFFFFF) | 0x101010;
+    return ((0x123456 * index) % 0xFFFFFF) | 0x202020;
 }
 
 static pos bricks[7][4] = {

@@ -99,8 +99,8 @@ void render()
 
 void direction_press(int dir)
 {
-	if (dir == KEY_UP) y--;
-	if (dir == KEY_DOWN) y++;
+	// if (dir == KEY_UP) y--;
+	// if (dir == KEY_DOWN) y++;
 }
 
 void a_press() 

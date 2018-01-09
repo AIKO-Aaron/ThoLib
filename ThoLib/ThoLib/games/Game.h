@@ -10,6 +10,7 @@
 #define Game_h
 
 #include "../ThoLib.h"
+#include "../Input.h"
 #include <stdio.h>
 #include <iostream>
 #include <vector>
@@ -24,6 +25,12 @@ static int timer;
 class Game
 {
 public:
+    virtual void setupGame() = 0;
+    virtual void render() = 0;
+    virtual void direction_press(int dir) = 0;
+    virtual void a_press() = 0;
+    virtual void b_press() = 0;
+    
     void run()
     {
         while(true)
@@ -38,12 +45,6 @@ public:
             usleep(1000000 / 60 - duration); // Sleep for 1000/60 milliseconds (60 hertz) & don't wait the time we needed to render & do calculations
         }
     }
-    
-    virtual void setupGame() = 0;
-    virtual void render() = 0;
-    virtual void direction_press(int dir) = 0;
-    virtual void a_press() = 0;
-    virtual void b_press() = 0;
 };
 
 class Snake : public Game

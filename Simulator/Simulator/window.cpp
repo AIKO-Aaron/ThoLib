@@ -32,6 +32,10 @@ void startLoop()
 			{
 				if (e.key.keysym.sym == SDLK_ESCAPE) running = false;
                 
+                /**
+                  TODO implement input....
+                 */
+                
                 if(e.key.keysym.sym == SDLK_RIGHT) direction_press(KEY_RIGHT);
                 else if(e.key.keysym.sym == SDLK_LEFT) direction_press(KEY_LEFT);
                 else if(e.key.keysym.sym == SDLK_UP) direction_press(KEY_UP);
