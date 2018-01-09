@@ -5,7 +5,7 @@
 #include <errno.h>
 #include <termios.h>
 
-// #define DEBUG_NO_CRASH // No spamming because arduino is not connected (Or not being executed on linux)
+#define DEBUG_NO_CRASH // No spamming because arduino is not connected (Or not being executed on linux)
 
 typedef int arduino;
 

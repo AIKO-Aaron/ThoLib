@@ -33,7 +33,6 @@ inline void drawPixel(uint8_t x, uint8_t y, int color) // Inline function --> co
 
 inline void sendCommand(int cmd)
 {
-    cmd &= 0x00FFFFFF; // Clear alpha bit
     cmd |= 0xFF << 24; // Set command bits
     writeInt(cmd);
 }

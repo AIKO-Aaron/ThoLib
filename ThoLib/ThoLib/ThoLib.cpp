@@ -17,7 +17,7 @@ void setup()
     std::cout << "Setting up arduino..." << std::endl;
     teensy = openArduino(); // Try to open interface to arduino....
     
-    writeInt(0xDDCCBBAA); // Write "I'm here, waiting" to arduino
+    writeInt(0xC0FFEEAA); // Write "I'm here, waiting" to arduino
 #ifndef DEBUG_NO_CRASH
     while(readArduino(teensy) != 0x0A) usleep(10000); // Wait for arduino to acknowledge that I'm here
 #endif
@@ -30,7 +30,7 @@ void clearScreen()
 
 void reset()
 {
-    sendCommand(0xFFFFFF); // -1
+    sendCommand(0xFFFFFF); // -1 --> reset
 }
 
 void writeInt(int a)

@@ -14,13 +14,13 @@
 
 
 /**
- Connection:
+ Connection ideas:
  
  If gpio:
     Spawn new thread & use python to read from gpio
     (Maybe) Connect controller to arduino & connect 6 wires
  
- Else:
+ Else (Controller -> USB):
     Find library for controller (+usb)
  
  */
@@ -32,7 +32,7 @@ userInput getUserInput()
     // TODO handle input
     
     /**
-     // Everything boolean
+     // Everything is boolean!
      int ud = up - down;
      int lr = left - right;
 
