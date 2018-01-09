@@ -9,13 +9,14 @@
 #include <iostream>
 #include "ThoLib.h"
 #include "arduino.h"
-#include "games/Game.h"
+#include "games/Game.h" // All games defined in there --> implementation in other classes
 
 
 int main(int argc, const char * argv[]) {
     setup();
-    Game *game = new Snake();
     
+    // Instantiate game snake & run
+    Game *game = new Snake();
     game->run();
     
     return 0;
