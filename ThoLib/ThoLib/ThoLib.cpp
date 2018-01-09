@@ -10,15 +10,25 @@
 #include "ThoLib.h"
 #include <iostream>
 
-arduino teensy;
+arduino teensy; // public arduino variable
 
 void setup()
 {
     std::cout << "Setting up arduino..." << std::endl;
     teensy = openArduino(); // Try to open interface to arduino....
     
-    writeInt(0xDDCCBBAA); // Write "I'm here to arduino"
+    writeInt(0xDDCCBBAA); // Write "I'm here, waiting" to arduino
     while(readArduino(teensy) != 0x0A) usleep(10000); // Wait for arduino to acknowledge that I'm here
+}
+
+void clearScreen()
+{
+    sendCommand(0x00DEAD);
+}
+
+void reset()
+{
+    sendCommand(0xFFFFFF); // -1
 }
 
 void writeInt(int a)

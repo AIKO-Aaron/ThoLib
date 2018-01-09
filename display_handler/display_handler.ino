@@ -24,7 +24,20 @@ void loop() {
     uint8_t x = pos & 0x0F;
     uint8_t y = pos >> 4;
 
-    WRITE_COLOR(x, y, input);
+    if(x == -1 && y == -1)
+    {
+      //Special treatment
+      switch(input)
+      {
+        case 0xFFFFFF: // reset (NYI)
+          break;
+        case 0x00DEAD:
+          memset(leds, NUM_LEDS * 4, 0);
+        default:
+          break;
+      }
+    }
+    else WRITE_COLOR(x, y, input);
     
     FastLED.show(); // Update display...
   } else {

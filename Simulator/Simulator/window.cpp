@@ -47,8 +47,8 @@ void startLoop()
 
 		// game....
 
-		for (int i = 0; i < WIDTH * HEIGHT; i++) pixels[i] = 0;
-		render();
+		for (int i = 0; i < WIDTH * HEIGHT; i++) pixels[i] = 0; // Clear screen
+		render(); // Render stuff
 
 		SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0xFF);
 		SDL_RenderClear(renderer);

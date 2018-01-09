@@ -15,7 +15,8 @@
 #define KEY_UP 3
 
 // Combined information of the controller state
-typedef struct {
+typedef struct
+{
     int direction_press;
     bool a_press, b_press;
 } userInput;

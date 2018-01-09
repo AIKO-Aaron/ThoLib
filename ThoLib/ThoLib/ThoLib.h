@@ -19,6 +19,9 @@ typedef unsigned char uint8_t;
 
 void setup(); // Set arduino up
 
+void clearScreen();
+void reset();
+
 void writeInt(int a); // Write an integer to the arduino
 
 inline void drawPixel(uint8_t x, uint8_t y, int color) // Inline function --> convert position & color to single int & write it
@@ -26,6 +29,13 @@ inline void drawPixel(uint8_t x, uint8_t y, int color) // Inline function --> co
     color &= 0x00FFFFFF; // Clear alpha bit
     color |= (x & 0x0F) << 24 | (y & 0x0F) << 28;
     writeInt(color);
+}
+
+inline void sendCommand(int cmd)
+{
+    cmd &= 0x00FFFFFF; // Clear alpha bit
+    cmd |= 0xFF << 24; // Set command bits
+    writeInt(cmd);
 }
 
 void drawVerticalLine(uint8_t x, uint8_t y, uint8_t length, int color); // Draw a vertical line
