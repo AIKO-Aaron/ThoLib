@@ -10,7 +10,7 @@
 #include "ThoLib.h"
 #include <iostream>
 
-arduino teensy; // public arduino variable
+static arduino teensy; // public arduino variable
 
 void setup()
 {
