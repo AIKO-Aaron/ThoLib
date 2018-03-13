@@ -47,8 +47,8 @@ void *input_loop(void* args) {
                 else if(left) direction = KEY_LEFT;
                 else if(up) direction = KEY_UP;
                 else if(down) direction = KEY_DOWN;
-            	else direction = -1;
-	    }
+		else direction = -1;
+            }
         }
     }
 }

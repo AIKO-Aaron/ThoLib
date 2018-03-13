@@ -5,6 +5,7 @@
 #include <iostream>
 
 int *pixels = new int[WIDTH * HEIGHT];
+int lastDir = 0;
 
 void startLoop()
 {
@@ -31,19 +32,17 @@ void startLoop()
 			else if (e.type == SDL_KEYDOWN)
 			{
 				if (e.key.keysym.sym == SDLK_ESCAPE) running = false;
-                
+                	}
                 /**
                   TODO implement input....
                  */
-                
-                if(e.key.keysym.sym == SDLK_RIGHT) direction_press(KEY_RIGHT);
-                else if(e.key.keysym.sym == SDLK_LEFT) direction_press(KEY_LEFT);
-                else if(e.key.keysym.sym == SDLK_UP) direction_press(KEY_UP);
-                else if(e.key.keysym.sym == SDLK_DOWN) direction_press(KEY_DOWN);
-                else if(e.key.keysym.sym == SDLK_KP_ENTER || e.key.keysym.sym == SDLK_SPACE) a_press();
-                else if(e.key.keysym.sym == SDLK_LSHIFT || e.key.keysym.sym == SDLK_b) b_press();
-			}
 		}
+
+                userInput input = getUserInput();
+            	if(lastDir != input.direction_press && input.direction_press != -1) direction_press(input.direction_press);
+            	lastDir = input.direction_press;
+		if(input.a_press) a_press();
+            	if(input.b_press) b_press();
 
 		// game....
 

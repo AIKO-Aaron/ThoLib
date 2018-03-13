@@ -7,6 +7,7 @@
 //
 
 #include <iostream>
+#include "Input.h"
 #include "ThoLib.h"
 #include "arduino.h"
 #include "games/Game.h" // All games defined in there --> implementation in other classes
@@ -14,9 +15,10 @@
 
 int main(int argc, const char * argv[]) {
     setup();
-    
+    setupInput();
+
     // Instantiate game snake & run it
-    Game *game = new Flappy();
+    Game *game = new Snake(); //new Flappy();
     game->run();
     
     return 0;

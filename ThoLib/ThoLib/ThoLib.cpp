@@ -16,19 +16,19 @@ void setup()
 {
     std::cout << "Setting up arduino..." << std::endl;
     teensy = openArduino(); // Try to open interface to arduino....
-    
-    writeInt(0x30313233); // Write "I'm here, waiting" to arduino
-#ifndef DEBUG_NO_CRASH
-    while(readArduino(teensy) != 0x41)
-    {
-        writeInt(0x30313233); // Wait for arduino to acknowledge that I'm here
-        usleep(10000); // necessary...
-    }
-#endif
+    //writeInt(0x30313233); // Write "I'm here, waiting" to arduino
+    //writeInt(0x33323130);
+    /**while(true) {std::cout << readArduino(teensy);
+        writeInt(0x31323334);
+        usleep(1000000);
+    }*/
+    std::cout << "Opening arduino done... Synchronizing" << std::endl;
+    std::cout << "Done" << std::endl;
 }
 
 void clearScreen()
 {
+    // std::cout << readArduino(teensy);
     sendCommand(0x00DEAD);
 }
 
@@ -37,17 +37,9 @@ void reset()
     sendCommand(0xFFFFFF); // -1 --> reset
 }
 
-void read()
-{
-    readArduino(teensy);
-}
-
 void writeInt(int a)
 {
-    for(int i = 0; i < 4; i++)
-    {
-        writeArduino(teensy, a >> (8 * i)); // Write each byte...
-    }
+    writeIntArduino(teensy, a);
 }
 
 void fillRect(uint8_t x, uint8_t y, uint8_t w, uint8_t h, int color)

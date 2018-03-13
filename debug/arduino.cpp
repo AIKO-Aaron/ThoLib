@@ -11,9 +11,9 @@ static void error(std::string message) {
 
 arduino openArduino() {
 #ifdef __linux__
-	int fd = open("/dev/ttyACM0", O_RDWR | O_NONBLOCK);
+	int fd = open("/dev/ttyACM0", O_RDWR);
 #elif defined(__APPLE__)
-    int fd = open("/dev/cu.usbmodem1421", O_RDWR | O_NONBLOCK);
+    int fd = open("/dev/cu.usbmodem1421", O_RDWR);
 #endif
 	if(fd == -1) error("error: open");
 	//do some initialisation
@@ -65,14 +65,11 @@ unsigned char readArduino(arduino arduino) {
 void writeArduino(arduino arduino, unsigned char c) {
 	int w = 0;
 	if((w = write(arduino, &c, sizeof(c))) == -1) error("error: write");
-	// std::cout << "Wrote: " << w << " bytes" << std::endl;
+	std::cout << "Wrote: " << w << " bytes" << std::endl;
 }
-void writeIntArduino(arduino arduino, unsigned int i) {
-	//int w = 0;
-	//if((w = write(arduino, (char*) &i, sizeof(i))) == -1) error("error: write");
-	// fsync(arduino);
-	// std::cout << "Wrote "<< w << " bytes" << std::endl;
 
-	write(arduino, (char*) &i, sizeof(i));
-	// fwrite((char*) &i, 4, 1, arduino);
+void writeIntArduino(arduino arduino, unsigned int i) {
+	int w = 0;
+	if((w = write(arduino, (char*) &i, sizeof(i))) == -1) error("error: write");
+	std::cout << "Wrote: " << w << " bytes" << std::endl;
 }

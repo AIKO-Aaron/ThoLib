@@ -34,6 +34,8 @@
 #ifndef Game_h
 #define Game_h
 
+#define SPEED_MOD 1
+
 #include "../ThoLib.h"
 #include "../Input.h"
 #include <stdio.h>
@@ -47,6 +49,7 @@ typedef struct pos
     int x, y;
 } pos;
 static int timer; // A timer (for convinience in the games, because they all have a global timer variable)
+static int lastDir = 0;
 
 class Game
 {
@@ -63,23 +66,29 @@ public:
     void run()
     {
         running = true;
-        while(running)
+        int frames = 0;
+	while(running)
         {
+	    if(frames++ >= 60) {
+	        frames = 0;
+	        std::cout << "Second" << std::endl;
+	    }
             std::clock_t start = clock();
             double duration;
-            
+            // std::cout << "Hello World" << std::endl;
             userInput input = getUserInput();
-            direction_press(input.direction_press);
-            if(input.a_press) a_press();
+            if(input.direction_press != lastDir && input.direction_press != -1) direction_press(input.direction_press);
+            lastDir = input.direction_press;
+	    if(input.a_press) a_press();
             if(input.b_press) b_press();
 
-            // TODO handle input
-            clearScreen();
+            //clearScreen();
             render();
-            
             duration = (clock() - start) / (double) CLOCKS_PER_SEC;
-            usleep(1000000 / 60 - duration); // Sleep for 1000/60 milliseconds (60 hertz) & don't wait the time we needed to render & do calculations
-            read();
+            usleep(SPEED_MOD * 1000000 / 60 - duration / 1000); // Sleep for 1000/60 milliseconds (60 hertz) & don't wait the time we needed to render & do calculations
+            // usleep(1);
+	    //read();
+	    // std::cout << running << std::endl;
         }
     }
 };

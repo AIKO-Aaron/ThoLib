@@ -6,6 +6,7 @@
 int main(int argc, char **args)
 {
     srand((int) time(NULL));
+    setupInput();
     setupGame();
 	startLoop();
 	// std::cin.get();

@@ -10,6 +10,7 @@
 #endif
 
 #include "util.h"
+#include "Input.h"
 #include <iostream>
 
 #define SIDEWAYS

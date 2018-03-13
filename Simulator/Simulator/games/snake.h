@@ -8,7 +8,7 @@ typedef struct {
 
 int timer = 0;
 
-#define TIME 60/6
+#define TIME 20/6
 
 pos foodpos;
 int direction = 0;

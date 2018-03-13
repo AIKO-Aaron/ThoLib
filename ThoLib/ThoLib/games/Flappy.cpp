@@ -78,6 +78,7 @@ void Flappy::render()
         srandom_int(rand());
         y = WIDTH / 2;
         yvelocity = 0;
+	// exit(0);
     }
     
     yvelocity += SPEED;
