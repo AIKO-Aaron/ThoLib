@@ -14,6 +14,11 @@ pos foodpos = { rand() % WIDTH, rand() % HEIGHT };
 int direction = 0;
 std::vector<pos> currentSnake = std::vector<pos>();
 
+void die() {
+	for(int i = 0; i < currentSnake.size(); i++) clearPixel(currentSnake[i].x, currentSnake[i].y);
+	currentSnake.clear();
+}
+
 void Snake::render()
 {
    //clearScreen();
@@ -32,13 +37,14 @@ void Snake::render()
     {
        clearScreen();
        timer = 0;
-	//drawPixel(currentSnake[currentSnake.size() - 1].x, currentSnake[currentSnake.size() - 1].y, 0);
+	clearPixel(currentSnake[currentSnake.size() - 1].x, currentSnake[currentSnake.size() - 1].y);
         for(int i = (int) currentSnake.size() - 1; i > 0; i--)
         {
             if(currentSnake[i].x == currentSnake[0].x && currentSnake[i].y == currentSnake[0].y && (currentSnake.size() > 4 && currentSnake.size() - 1 != i))
             {
-                currentSnake.clear();
-                direction = 0;
+                //currentSnake.clear();
+                die();
+		direction = 0;
             }
             currentSnake[i] = currentSnake[i - 1];
         }
@@ -48,13 +54,14 @@ void Snake::render()
         if(currentSnake[0].x < 0 || currentSnake[0].x >= WIDTH || currentSnake[0].y < 0 || currentSnake[0].y >= HEIGHT)
         {
 	    //for(int i = 0; i < currentSnake.size(); i++) drawPixel(currentSnake[0].x, currentSnake[i].y, 0);
-            currentSnake.clear();
-            direction = 0;
+            //currentSnake.clear();
+            die();
+	    direction = 0;
         }
         
         if(foodpos.x == currentSnake[0].x && foodpos.y == currentSnake[0].y)
         {
-	    //drawPixel(foodpos.x, foodpos.y, 0);
+	    drawPixel(foodpos.x, foodpos.y, 0);
             currentSnake.push_back({currentSnake[0].x, currentSnake[0].y});
             foodpos = { rand() % WIDTH, rand() % HEIGHT };
         }
