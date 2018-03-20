@@ -116,7 +116,7 @@ class Snake : public Game
     
     
     // unused...
-    void setupGame() override {}
+    void setupGame() override;
     void a_press() override {}
     void b_press() override {}
 };

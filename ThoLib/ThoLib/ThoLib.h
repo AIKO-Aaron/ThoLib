@@ -40,7 +40,8 @@ inline void sendCommand(int cmd)
 }
 
 inline void clearPixel(uint8_t x, uint8_t y) {
-    int cmd = 0xFEFFFF | (x&0xF)|(y&0xF)<<4;
+    int cmd = 0xFEFFFF00 | (x & 0x0F) | (y & 0x0F) << 4;
+    writeInt(cmd);
 }
 
 void drawVerticalLine(uint8_t x, uint8_t y, uint8_t length, int color); // Draw a vertical line

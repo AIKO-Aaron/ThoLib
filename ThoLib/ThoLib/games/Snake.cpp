@@ -19,6 +19,10 @@ void die() {
 	currentSnake.clear();
 }
 
+void Snake::setupGame() {
+	drawPixel(foodpos.x, foodpos.y, 0xFF0000);
+}
+
 void Snake::render()
 {
    //clearScreen();
@@ -26,16 +30,16 @@ void Snake::render()
     while(currentSnake.size() < 4) {
         currentSnake.push_back({ WIDTH / 2, HEIGHT / 2 });
     }
-    
+/**
     for(int i = 0; i < currentSnake.size(); i++)
     {
 	//std::cout << "Drawing pixel..." << std::endl;
         drawPixel(currentSnake[i].x, currentSnake[i].y, 0xFF00FF);
     }
-    
+*/
     if(timer++ >= TIME)
     {
-       clearScreen();
+       //clearScreen();
        timer = 0;
 	clearPixel(currentSnake[currentSnake.size() - 1].x, currentSnake[currentSnake.size() - 1].y);
         for(int i = (int) currentSnake.size() - 1; i > 0; i--)
@@ -50,7 +54,7 @@ void Snake::render()
         }
         currentSnake[0].x += direction == KEY_RIGHT ? 1 : direction == KEY_LEFT ? -1 : 0;
         currentSnake[0].y += direction == KEY_DOWN ? 1 : direction == KEY_UP ? -1 : 0;
-        
+
         if(currentSnake[0].x < 0 || currentSnake[0].x >= WIDTH || currentSnake[0].y < 0 || currentSnake[0].y >= HEIGHT)
         {
 	    //for(int i = 0; i < currentSnake.size(); i++) drawPixel(currentSnake[0].x, currentSnake[i].y, 0);
@@ -58,16 +62,22 @@ void Snake::render()
             die();
 	    direction = 0;
         }
-        
+
+	for(int i = 0; i < currentSnake.size(); i++)
+    	{
+            drawPixel(currentSnake[i].x, currentSnake[i].y, 0xFF00FF);
+    	}
+
         if(foodpos.x == currentSnake[0].x && foodpos.y == currentSnake[0].y)
         {
 	    drawPixel(foodpos.x, foodpos.y, 0);
             currentSnake.push_back({currentSnake[0].x, currentSnake[0].y});
             foodpos = { rand() % WIDTH, rand() % HEIGHT };
+	    drawPixel(foodpos.x, foodpos.y, 0xFF0000);
         }
     }
     //std::cout << "Drawing pixels..." << std::endl;
-    drawPixel(foodpos.x, foodpos.y, 0xFF0000);
+    //drawPixel(foodpos.x, foodpos.y, 0xFF0000);
     //std::cout << "Done..."<<std::endl;
     return;
 }

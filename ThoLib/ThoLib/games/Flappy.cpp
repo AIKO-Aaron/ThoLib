@@ -82,7 +82,9 @@ void Flappy::render()
     }
     
     yvelocity += SPEED;
+    int yy = y;
     y += yvelocity;
+    if(yy = (int)y) return;
     for (int i = offset; i < WIDTH; i += PIPE_DISTANCE)
     {
         int ri = random_int(2, HEIGHT - TOP_BOTTOM, currentFrontPipe + (i - offset) / PIPE_DISTANCE);

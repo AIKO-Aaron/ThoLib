@@ -22,7 +22,7 @@ arduino openArduino() {
 	if (tcgetattr(fd, &toptions) == -1) error("error: get attriubutes");
 	
 	//set baudrate
-	speed_t brate = B9600;
+	speed_t brate = B230400;
 	cfsetispeed(&toptions, brate);
     cfsetospeed(&toptions, brate);
 

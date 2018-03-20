@@ -150,13 +150,18 @@ void Tetris::render()
     }
     
     
-    for(int i = 0; i < 4; i++)
+/**    for(int i = 0; i < 4; i++)
     {
         drawPixel(movingBrick[i].x, movingBrick[i].y, indexToColor(currentIndex + 1));
     }
-    
+   */ 
     if(++timer >= TIME && !gameover)
     {
+	for(int i = 0; i < 4; i++)
+    	{
+            drawPixel(movingBrick[i].x, movingBrick[i].y, indexToColor(currentIndex + 1));
+    	}
+
         timer = 0;
         bool couldMove = true;
         for(int i = 0; i < 4; i++)
