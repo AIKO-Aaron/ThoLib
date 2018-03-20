@@ -38,7 +38,9 @@ void startLoop()
                  */
 		}
 
-                userInput input = getUserInput();
+        userInput input = {
+            
+        };//getUserInput();
             	if(lastDir != input.direction_press && input.direction_press != -1) direction_press(input.direction_press);
             	lastDir = input.direction_press;
 		if(input.a_press) a_press();

@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		933E06771FEE912400037515 /* Flappy.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 933E06761FEE912400037515 /* Flappy.cpp */; };
 		934AF9701FE9882E00389908 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 934AF96F1FE9882E00389908 /* main.cpp */; };
+		934BE15D2061935900CD3FE5 /* GameSelector.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 934BE15C2061935900CD3FE5 /* GameSelector.cpp */; };
 		9373C7551FEA761B007F5293 /* ThoLib.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9373C7541FEA761B007F5293 /* ThoLib.cpp */; };
 		9373C75A1FEA7B60007F5293 /* arduino.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9373C7591FEA7B60007F5293 /* arduino.cpp */; };
 		9373C75D1FEA7F30007F5293 /* Snake.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9373C75C1FEA7F30007F5293 /* Snake.cpp */; };
@@ -32,6 +33,8 @@
 		933E06761FEE912400037515 /* Flappy.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Flappy.cpp; sourceTree = "<group>"; };
 		934AF96C1FE9882E00389908 /* ThoLib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = ThoLib; sourceTree = BUILT_PRODUCTS_DIR; };
 		934AF96F1FE9882E00389908 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		934BE15B2061925000CD3FE5 /* Merges */ = {isa = PBXFileReference; lastKnownFileType = text; path = Merges; sourceTree = "<group>"; };
+		934BE15C2061935900CD3FE5 /* GameSelector.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = GameSelector.cpp; sourceTree = "<group>"; };
 		9373C7531FEA7609007F5293 /* ThoLib.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ThoLib.h; sourceTree = "<group>"; };
 		9373C7541FEA761B007F5293 /* ThoLib.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ThoLib.cpp; sourceTree = "<group>"; };
 		9373C7571FEA7623007F5293 /* arduino.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = arduino.h; sourceTree = "<group>"; };
@@ -78,6 +81,7 @@
 				9373C7571FEA7623007F5293 /* arduino.h */,
 				9373C7531FEA7609007F5293 /* ThoLib.h */,
 				9373C7541FEA761B007F5293 /* ThoLib.cpp */,
+				934BE15B2061925000CD3FE5 /* Merges */,
 				93F5D97F2004A48000EC2587 /* Input.cpp */,
 				93F5D9802004A48000EC2587 /* Input.h */,
 				934AF96F1FE9882E00389908 /* main.cpp */,
@@ -92,6 +96,7 @@
 				9373C7611FEAF678007F5293 /* Tetris.cpp */,
 				933E06761FEE912400037515 /* Flappy.cpp */,
 				9373C7641FEAF6E6007F5293 /* Game.h */,
+				934BE15C2061935900CD3FE5 /* GameSelector.cpp */,
 			);
 			path = games;
 			sourceTree = "<group>";
@@ -157,6 +162,7 @@
 				9373C75A1FEA7B60007F5293 /* arduino.cpp in Sources */,
 				9373C7621FEAF678007F5293 /* Tetris.cpp in Sources */,
 				93F5D9812004A48000EC2587 /* Input.cpp in Sources */,
+				934BE15D2061935900CD3FE5 /* GameSelector.cpp in Sources */,
 				934AF9701FE9882E00389908 /* main.cpp in Sources */,
 				9373C7551FEA761B007F5293 /* ThoLib.cpp in Sources */,
 				933E06771FEE912400037515 /* Flappy.cpp in Sources */,

@@ -109,14 +109,15 @@ public:
  
  */
 
+
+
 class Snake : public Game
 {
     void render() override;
     void direction_press(int dir) override;
-    
+    void setupGame() override;
     
     // unused...
-    void setupGame() override;
     void a_press() override {}
     void b_press() override {}
 };
@@ -132,6 +133,18 @@ class Tetris : public Game
 
 class Flappy : public Game
 {
+    void setupGame() override;
+    void render() override;
+    void direction_press(int dir) override;
+    void a_press() override;
+    void b_press() override;
+};
+
+// Only add games to selection list if finished
+class GameSelector : public Game
+{
+    int index;
+    
     void setupGame() override;
     void render() override;
     void direction_press(int dir) override;
