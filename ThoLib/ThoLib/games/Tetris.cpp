@@ -3,9 +3,16 @@
 #include <vector>
 #include <unistd.h>
 
-#define TIME 60 / 2
+#define TIME 60
+
+#undef WIDTH
+#undef HEIGHT
+
+#define WIDTH 10
+#define HEIGHT 15
 
 unsigned int currentIndex = 0;
+bool tet_draw = true;
 
 pos movingBrick[4]; // the moving brick --> all bricks have 4 tiles
 unsigned int field[WIDTH * HEIGHT]; // 15 * 10 --> 150 tiles
@@ -56,21 +63,26 @@ void newBrick()
             for(int j = i; j > 0; j--)
             {
                 // Copy line j-1 to j
-                for(int k = 0; k < WIDTH; k++) field[k + j * WIDTH] = field[k + (j-1) * WIDTH];
-            }
+                for(int k = 0; k < WIDTH; k++) {
+		    field[k + j * WIDTH] = field[k + (j-1) * WIDTH];
+	        }
+	    }
         }
-        
         for(int i = WIDTH * HEIGHT - 1; i >= 0; i--)
         {
+	    if(line) clearPixel(HEIGHT - 2 - (i / WIDTH), i % WIDTH);
             if(field[i] == 0) continue; // No brick that could fall down...
             if(i / WIDTH != HEIGHT - 1 && field[i + WIDTH] == 0) // Below brick is free
             {
                 if(canFallDown(i))
                 {
+		    //drawPixel(HEIGHT - i / WIDTH, i % WIDTH, 0));// indexToColor(field[i]));
                     field[i + WIDTH] = field[i];
                     field[i] = 0;
                 }
             }
+	    if(line) drawPixel(HEIGHT - 1 - (i / WIDTH) + 1, i % WIDTH, indexToColor(field[i]));
+            if(line) usleep(16000);
         }
     }
     
@@ -99,6 +111,7 @@ void rotateRight()
     }
     for(int i = 0; i < 4; i++)
     {
+	clearPixel(HEIGHT-1-movingBrick[i].y, movingBrick[i].x);
         int l = movingBrick[i].x;
         movingBrick[i].x = (movingBrick[i].y - center.y) + center.x;
         movingBrick[i].y = -(l - center.x) + center.y;
@@ -127,13 +140,16 @@ void rotateLeft()
 void Tetris::setupGame()
 {
     pos* p = bricks[rand() % 7];
+    for(int i = 0; i < WIDTH * HEIGHT; i++) field[i] = 0;
     for(int i = 0; i < 4; i++) movingBrick[i] = p[i];
+    currentIndex = 1;
 }
 
 void Tetris::render()
 {
     if(gameover) --gameover;
     
+	/**
     for(int i = 0; i < WIDTH * HEIGHT; i++)
     {
         if(gameover > 0)
@@ -147,19 +163,22 @@ void Tetris::render()
             }
         }
         else drawPixel(i % WIDTH, i / WIDTH, field[i] == 0 ? 0x000000 : indexToColor(field[i]));
+    }*/
+
+    if(gameover) {
+	if(gameover == 1) {
+	    for(int i = 0; i < WIDTH * HEIGHT; i++) field[i] = 0;
+            pos* p = bricks[rand() % 7];
+            for(int i = 0; i < 4; i++) movingBrick[i] = p[i];
+	}
     }
-    
-    
-/**    for(int i = 0; i < 4; i++)
-    {
-        drawPixel(movingBrick[i].x, movingBrick[i].y, indexToColor(currentIndex + 1));
-    }
-   */ 
+
     if(++timer >= TIME && !gameover)
     {
+	// Clear current brick...
 	for(int i = 0; i < 4; i++)
     	{
-            drawPixel(movingBrick[i].x, movingBrick[i].y, indexToColor(currentIndex + 1));
+            drawPixel(HEIGHT-1-movingBrick[i].y, movingBrick[i].x, 0);
     	}
 
         timer = 0;
@@ -175,21 +194,39 @@ void Tetris::render()
         {
             for(int i = 0; i < 4; i++)
             {
-                --movingBrick[i].y;
+		int inField = movingBrick[i].x + movingBrick[i].y * WIDTH;
+                drawPixel(HEIGHT-1-movingBrick[i].y, movingBrick[i].x, field[inField] == 0?0x000000:indexToColor(field[inField]));
+		--movingBrick[i].y;
             }
+	    for(int i = 0; i < 4; i++)
+   	    {
+        	drawPixel(HEIGHT-1-movingBrick[i].y, movingBrick[i].x, indexToColor(currentIndex + 1));
+    	    }
             newBrick();
         }
+	tet_draw = true;
+    }
+
+    if(tet_draw) {
+	//for(int i = 0; i < HEIGHT; i++) drawPixel(HEIGHT, i, 0);
+	for(int i = 0; i < 4; i++)
+        {
+            drawPixel(HEIGHT-1-movingBrick[i].y, movingBrick[i].x, indexToColor(currentIndex + 1));
+        }
+	tet_draw = false;
     }
 }
 
 void Tetris::direction_press(int dir)
 {
     if(gameover) return;
+    tet_draw = true;
     if(dir == KEY_RIGHT)
     {
         for(int i = 0; i < 4; i++)
         {
-            if(movingBrick[i].x + 1 >= WIDTH || field[movingBrick[i].x + 1 + movingBrick[i].y * WIDTH] != 0) return;
+            clearPixel(HEIGHT-1-movingBrick[i].y, movingBrick[i].x);
+	    if(movingBrick[i].x + 1 >= WIDTH || field[movingBrick[i].x + 1 + movingBrick[i].y * WIDTH] != 0) return;
         }
         for(int i = 0; i < 4; i++)
         {
@@ -200,24 +237,27 @@ void Tetris::direction_press(int dir)
     {
         for(int i = 0; i < 4; i++)
         {
-            if(movingBrick[i].x - 1 < 0 || field[movingBrick[i].x - 1 + movingBrick[i].y * WIDTH]) return;
+            clearPixel(HEIGHT-1-movingBrick[i].y, movingBrick[i].x);
+	    if(movingBrick[i].x - 1 < 0 || field[movingBrick[i].x - 1 + movingBrick[i].y * WIDTH]) return;
         }
         for(int i = 0; i < 4; i++)
         {
             --movingBrick[i].x;
         }
-    }
+    } else if(dir == KEY_UP && !gameover) rotateRight();
     else if(dir == KEY_DOWN) timer = TIME;
 }
 
 void Tetris::a_press()
 {
+    /**
     if(gameover) return;
-    rotateRight();
+    rotateRight();*/
 }
 
 void Tetris::b_press()
 {
+    /**
     if(gameover) return;
-    rotateLeft();
+    rotateLeft();*/
 }

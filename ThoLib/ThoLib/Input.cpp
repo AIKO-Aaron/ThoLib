@@ -71,7 +71,9 @@ userInput getUserInput()
     {
         direction,
         b_a,
-        b_b
+        b_b,
+    	b_select,
+	b_start
     };
     
 }

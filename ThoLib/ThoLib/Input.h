@@ -40,6 +40,7 @@ typedef struct
 {
     int direction_press;
     bool a_press, b_press;
+    bool start_press, select_press;
 } userInput;
 
 void setupInput();

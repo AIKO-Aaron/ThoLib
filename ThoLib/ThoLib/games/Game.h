@@ -55,7 +55,11 @@ class Game
 {
 public:
     bool running = false;
-    
+    bool mainGame = false, pressed = false;
+
+    Game() {};
+    Game(bool mg) {mainGame = mg;}
+
     virtual void setupGame() = 0;
     virtual void render() = 0;
     virtual void direction_press(int dir) = 0;
@@ -67,22 +71,28 @@ public:
     {
         running = true;
         int frames = 0;
+	setupGame();
 	while(running)
         {
 	    if(frames++ >= 60) {
 	        frames = 0;
-	        std::cout << "Second" << std::endl;
+	        //std::cout << "Second" << std::endl;
 	    }
             std::clock_t start = clock();
             double duration;
             // std::cout << "Hello World" << std::endl;
             userInput input = getUserInput();
-            if(input.direction_press != lastDir && input.direction_press != -1) direction_press(input.direction_press);
+            if(!mainGame && input.direction_press != lastDir && input.direction_press != -1) direction_press(input.direction_press);
             lastDir = input.direction_press;
 	    if(input.a_press) a_press();
             if(input.b_press) b_press();
 
-            //clearScreen();
+	    if(!mainGame && input.start_press) return;
+	    if(mainGame && (input.select_press || input.start_press) && !pressed) {
+		direction_press(input.select_press | input.start_press << 1);
+                pressed = true;
+	    } else if(mainGame && !(input.select_press || input.start_press)) pressed = false;
+	    //clearScreen();
             render();
             duration = (clock() - start) / (double) CLOCKS_PER_SEC;
             usleep(SPEED_MOD * 1000000 / 60 - duration / 1000); // Sleep for 1000/60 milliseconds (60 hertz) & don't wait the time we needed to render & do calculations
@@ -137,6 +147,20 @@ class Flappy : public Game
     void direction_press(int dir) override;
     void a_press() override;
     void b_press() override;
+};
+
+class GameSelector : public Game
+{
+public:
+	GameSelector() : Game(true) {}
+private:
+	void setupGame() override;
+	void render() override;
+	void direction_press(int dir) override;
+	void a_press() override;
+	void b_press() override;
+	void select_press();
+	void start_press();
 };
 
 #endif /* Game_h */

@@ -18,7 +18,7 @@ int main(int argc, const char * argv[]) {
     setupInput();
     clearScreen();
     // Instantiate game snake & run it
-    Game *game = new Snake(); //new Flappy();
+    Game *game = new GameSelector();
     game->run();
     
     return 0;

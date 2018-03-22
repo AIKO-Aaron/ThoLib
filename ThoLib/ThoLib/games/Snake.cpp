@@ -15,12 +15,20 @@ int direction = 0;
 std::vector<pos> currentSnake = std::vector<pos>();
 
 void die() {
+	clearScreen();
+	drawPixel(foodpos.x, foodpos.y, 0xFF0000);
 	for(int i = 0; i < currentSnake.size(); i++) clearPixel(currentSnake[i].x, currentSnake[i].y);
 	currentSnake.clear();
 }
 
 void Snake::setupGame() {
 	drawPixel(foodpos.x, foodpos.y, 0xFF0000);
+	die();
+}
+
+bool inSnake(int x, int y) {
+	for(int i = 0; i < currentSnake.size(); i++) if(currentSnake[i].x == x && currentSnake[i].y == y) return true;
+	return false;
 }
 
 void Snake::render()
@@ -63,6 +71,7 @@ void Snake::render()
 	    direction = 0;
         }
 
+        drawPixel(foodpos.x, foodpos.y, 0xFF0000);
 	for(int i = 0; i < currentSnake.size(); i++)
     	{
             drawPixel(currentSnake[i].x, currentSnake[i].y, 0xFF00FF);
@@ -72,7 +81,7 @@ void Snake::render()
         {
 	    drawPixel(foodpos.x, foodpos.y, 0);
             currentSnake.push_back({currentSnake[0].x, currentSnake[0].y});
-            foodpos = { rand() % WIDTH, rand() % HEIGHT };
+            while(inSnake(foodpos.x, foodpos.y)) foodpos = { rand() % WIDTH, rand() % HEIGHT };
 	    drawPixel(foodpos.x, foodpos.y, 0xFF0000);
         }
     }
@@ -86,8 +95,8 @@ void Snake::direction_press(int dir)
 {
     if(direction % 2 == dir % 2 && direction != dir)
     {
-        currentSnake.clear();
-        direction = 0;
-    }
-    direction = dir;
+	//die();
+        //currentSnake.clear();
+        //direction = 0;
+    } else direction = dir;
 }
