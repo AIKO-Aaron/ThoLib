@@ -64,7 +64,7 @@ unsigned char readArduino(arduino arduino) {
 
 void writeArduino(arduino arduino, unsigned char c) {
 	int w = 0;
-	if((w = write(arduino, &c, sizeof(c))) == -1) error("error: write");
+	if((w = (int)write(arduino, &c, sizeof(c))) == -1) error("error: write");
 	// std::cout << "Wrote: " << w << " bytes" << std::endl;
 }
 void writeIntArduino(arduino arduino, unsigned int i) {

@@ -1,0 +1,23 @@
+File: games/Flappy.cpp
+Line 87
+Change: = --> ==
+
+##########################
+
+File: games/Game.h
+Addition:
+
+// Only add games to selection list if finished
+class GameSelector : public Game
+{
+void setupGame() override;
+void render() override;
+void direction_press(int dir) override;
+void a_press() override;
+void b_press() override;
+};
+
+##########################
+
+NewFile (Just copy --> scp)
+File: games/GameSelector.cpp

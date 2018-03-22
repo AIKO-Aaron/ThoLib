@@ -21,9 +21,8 @@ void *input_loop(void* args) {
         printf("Error opening file...");
         exit(1);
     }
-    int i = 0;
     while(1) {
-        int n = read(fd, (void*) r, sizeof(char) * BUF_SIZE);
+        int n = (int)read(fd, (void*) r, sizeof(char) * BUF_SIZE);
         if(n <= 0) continue;
         else if(n == 8) {
             input_event e = (*(input_event*)r);

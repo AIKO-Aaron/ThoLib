@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		934BE15A206191EE00CD3FE5 /* Input.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 934BE158206191EE00CD3FE5 /* Input.cpp */; };
 		9373C7471FE9DEB8007F5293 /* SDL2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9373C7461FE9DEB8007F5293 /* SDL2.framework */; };
 		9373C74F1FE9DF07007F5293 /* util.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9373C74A1FE9DF07007F5293 /* util.cpp */; };
 		9373C7501FE9DF07007F5293 /* window.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9373C74B1FE9DF07007F5293 /* window.cpp */; };
@@ -28,6 +29,8 @@
 
 /* Begin PBXFileReference section */
 		933E06781FEE9FF600037515 /* flappy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = flappy.h; sourceTree = "<group>"; };
+		934BE158206191EE00CD3FE5 /* Input.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Input.cpp; sourceTree = "<group>"; };
+		934BE159206191EE00CD3FE5 /* Input.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Input.h; sourceTree = "<group>"; };
 		9373C73C1FE9DDA3007F5293 /* Simulator */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Simulator; sourceTree = BUILT_PRODUCTS_DIR; };
 		9373C7461FE9DEB8007F5293 /* SDL2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2.framework; path = sdl/SDL2.framework; sourceTree = SOURCE_ROOT; };
 		9373C7481FE9DF07007F5293 /* window.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = window.h; sourceTree = "<group>"; };
@@ -81,6 +84,8 @@
 				9373C74E1FE9DF07007F5293 /* util.h */,
 				9373C74B1FE9DF07007F5293 /* window.cpp */,
 				9373C7481FE9DF07007F5293 /* window.h */,
+				934BE158206191EE00CD3FE5 /* Input.cpp */,
+				934BE159206191EE00CD3FE5 /* Input.h */,
 			);
 			path = Simulator;
 			sourceTree = "<group>";
@@ -156,6 +161,7 @@
 				9373C7501FE9DF07007F5293 /* window.cpp in Sources */,
 				9373C7511FE9DF07007F5293 /* main.cpp in Sources */,
 				9373C7521FE9DF07007F5293 /* game.cpp in Sources */,
+				934BE15A206191EE00CD3FE5 /* Input.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
