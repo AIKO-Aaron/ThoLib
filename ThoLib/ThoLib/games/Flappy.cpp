@@ -12,6 +12,8 @@ float seed;
 #define PIPE_DISTANCE 7
 #define TOP_BOTTOM 4
 
+bool flap_redraw = true;
+
 // Chaos function for random
 float chaos(float i)
 {
@@ -54,7 +56,6 @@ void Flappy::render()
         {
             offset = PIPE_DISTANCE - 1;
             ++currentFrontPipe;
-            std::cout << "Next pipe..." << std::endl;
         }
     }
     bool dead = y < 0 || y >= HEIGHT;
@@ -70,7 +71,7 @@ void Flappy::render()
 #ifdef UNDYING
     dead = false;
 #endif
-    std::cout.flush();
+
     if (dead)
     {
         std::cout << "Dead" << std::endl;
@@ -85,14 +86,21 @@ void Flappy::render()
     int yy = y;
     y += yvelocity;
     if(yy == (int)y) return;
-    for (int i = offset; i < WIDTH; i += PIPE_DISTANCE)
-    {
-        int ri = random_int(2, HEIGHT - TOP_BOTTOM, currentFrontPipe + (i - offset) / PIPE_DISTANCE);
-        drawVerticalLine(i, 0, ri, 0xFF00FF);
-        drawVerticalLine(i, ri + 3, HEIGHT - 3 - ri, 0xFF00FF);
-        drawVerticalLine(i, ri, 3, 0xFFFFFF);
+    if(flap_redraw) {
+        clearScreen();
+        for (int i = offset; i < WIDTH; i += PIPE_DISTANCE)
+        {
+            int ri = random_int(2, HEIGHT - TOP_BOTTOM, currentFrontPipe + (i - offset) / PIPE_DISTANCE);
+            drawVerticalLine(i, 0, ri, 0xFF00FF);
+            usleep(10000);
+            drawVerticalLine(i, ri + 3, HEIGHT - 3 - ri, 0xFF00FF);
+            usleep(10000);
+            drawVerticalLine(i, ri, 3, 0xFFFFFF);
+            usleep(10000);
+        }
+        drawPixel(2, y, 0xFFFF00);
+        flap_redraw = true;
     }
-    drawPixel(2, y, 0xFFFF00);
 }
 
 void Flappy::direction_press(int dir)

@@ -1,6 +1,7 @@
 #include <iostream>
 
 void drawPixel(int x, int y, int color);
+void clearPixel(int x, int y);
 
 void fillRect(int x, int y, int w, int h, int color);
 void fillEllipse(int x, int y, int a, int b, int color);

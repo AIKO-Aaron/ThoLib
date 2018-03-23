@@ -1,25 +1,31 @@
 #include "../game.h"
 #include <iostream>
 #include <vector>
+#include <unistd.h>
 
-#define TIME 60 / 2
+typedef struct {
+    int x, y;
+} pos;
+int timer = 0;
+
+#define TIME 60
+
+// Setup sideways screen...
+#undef WIDTH
+#undef HEIGHT
+#define WIDTH 10
+#define HEIGHT 15
 
 unsigned int currentIndex = 0;
-
-typedef struct pos
-{
-    int x, y;
-    
-    inline pos operator+(pos second) {return {x + second.x, y + second.y};}
-} pos;
+bool tet_draw = true;
 
 pos movingBrick[4]; // the moving brick --> all bricks have 4 tiles
 unsigned int field[WIDTH * HEIGHT]; // 15 * 10 --> 150 tiles
-int timer = 0, gameover = 0;
+int gameover = 0;
 
 int indexToColor(int index)
 {
-    return ((0x123456 * index) % 0xFFFFFF) | 0x202020;
+    return ((0x123456 * index) % 0xFFFFFF) | 0x101010;
 }
 
 static pos bricks[7][4] = {
@@ -62,10 +68,14 @@ void newBrick()
             for(int j = i; j > 0; j--)
             {
                 // Copy line j-1 to j
-                for(int k = 0; k < WIDTH; k++) field[k + j * WIDTH] = field[k + (j-1) * WIDTH];
+                for(int k = 0; k < WIDTH; k++) {
+                    clearPixel(HEIGHT - 2 - (i / WIDTH), i % WIDTH);
+                    field[k + j * WIDTH] = field[k + (j-1) * WIDTH];
+                    drawPixel(HEIGHT - 1 - (i / WIDTH) + 1, i % WIDTH, indexToColor(field[i]));
+                    usleep(16000);
+                }
             }
         }
-        
         for(int i = WIDTH * HEIGHT - 1; i >= 0; i--)
         {
             if(field[i] == 0) continue; // No brick that could fall down...
@@ -105,64 +115,41 @@ void rotateRight()
     }
     for(int i = 0; i < 4; i++)
     {
+        clearPixel(HEIGHT-1-movingBrick[i].y, movingBrick[i].x);
         int l = movingBrick[i].x;
         movingBrick[i].x = (movingBrick[i].y - center.y) + center.x;
         movingBrick[i].y = -(l - center.x) + center.y;
     }
 }
 
-void rotateLeft()
-{
-    pos center = movingBrick[1];
-    for(int i = 0; i < 4; i++)
-    {
-        int l = movingBrick[i].x;
-        int x = -(movingBrick[i].y - center.y) + center.x;
-        int y = (l - center.x) + center.y;
-        if(x < 0 || x >= WIDTH || y < 0 || y >= HEIGHT || field[x + y * WIDTH] != 0) return;
-    }
-    for(int i = 0; i < 4; i++)
-    {
-        int l = movingBrick[i].x;
-        movingBrick[i].x = -(movingBrick[i].y - center.y) + center.x;
-        movingBrick[i].y = (l - center.x) + center.y;
-    }
-}
-
-
 void setupGame()
 {
     pos* p = bricks[rand() % 7];
+    for(int i = 0; i < WIDTH * HEIGHT; i++) field[i] = 0;
     for(int i = 0; i < 4; i++) movingBrick[i] = p[i];
+    currentIndex = 1;
 }
 
 void render()
 {
     if(gameover) --gameover;
     
-    for(int i = 0; i < WIDTH * HEIGHT; i++)
-    {
-        if(gameover > 0)
-        {
-            drawPixel(i % WIDTH, i / WIDTH, ((gameover / 10) % 2 == 1) ? (field[i] == 0 ? 0x000000 : indexToColor(field[i])) : 0x000000);
-            if(gameover == 1)
-            {
-                for(int i = 0; i < WIDTH * HEIGHT; i++) field[i] = 0;
-                pos* p = bricks[rand() % 7];
-                for(int i = 0; i < 4; i++) movingBrick[i] = p[i];
-            }
+    if(gameover) {
+        if(gameover == 1) {
+            for(int i = 0; i < WIDTH * HEIGHT; i++) field[i] = 0;
+            pos* p = bricks[rand() % 7];
+            for(int i = 0; i < 4; i++) movingBrick[i] = p[i];
         }
-        else drawPixel(i % WIDTH, i / WIDTH, field[i] == 0 ? 0x000000 : indexToColor(field[i]));
-    }
-    
-    
-    for(int i = 0; i < 4; i++)
-    {
-        drawPixel(movingBrick[i].x, movingBrick[i].y, indexToColor(currentIndex + 1));
     }
     
     if(++timer >= TIME && !gameover)
     {
+        // Clear current brick...
+        for(int i = 0; i < 4; i++)
+        {
+            drawPixel(HEIGHT-1-movingBrick[i].y, movingBrick[i].x, 0);
+        }
+        
         timer = 0;
         bool couldMove = true;
         for(int i = 0; i < 4; i++)
@@ -176,20 +163,38 @@ void render()
         {
             for(int i = 0; i < 4; i++)
             {
+                int inField = movingBrick[i].x + movingBrick[i].y * WIDTH;
+                drawPixel(HEIGHT-1-movingBrick[i].y, movingBrick[i].x, field[inField] == 0?0x000000:indexToColor(field[inField]));
                 --movingBrick[i].y;
+            }
+            for(int i = 0; i < 4; i++)
+            {
+                drawPixel(HEIGHT-1-movingBrick[i].y, movingBrick[i].x, indexToColor(currentIndex + 1));
             }
             newBrick();
         }
+        tet_draw = true;
+    }
+    
+    if(tet_draw) {
+        //for(int i = 0; i < HEIGHT; i++) drawPixel(HEIGHT, i, 0);
+        for(int i = 0; i < 4; i++)
+        {
+            drawPixel(HEIGHT-1-movingBrick[i].y, movingBrick[i].x, indexToColor(currentIndex + 1));
+        }
+        tet_draw = false;
     }
 }
 
 void direction_press(int dir)
 {
     if(gameover) return;
+    tet_draw = true;
     if(dir == KEY_RIGHT)
     {
         for(int i = 0; i < 4; i++)
         {
+            clearPixel(HEIGHT-1-movingBrick[i].y, movingBrick[i].x);
             if(movingBrick[i].x + 1 >= WIDTH || field[movingBrick[i].x + 1 + movingBrick[i].y * WIDTH] != 0) return;
         }
         for(int i = 0; i < 4; i++)
@@ -201,24 +206,24 @@ void direction_press(int dir)
     {
         for(int i = 0; i < 4; i++)
         {
+            clearPixel(HEIGHT-1-movingBrick[i].y, movingBrick[i].x);
             if(movingBrick[i].x - 1 < 0 || field[movingBrick[i].x - 1 + movingBrick[i].y * WIDTH]) return;
         }
         for(int i = 0; i < 4; i++)
         {
             --movingBrick[i].x;
         }
-    }
+    } else if(dir == KEY_UP && !gameover) rotateRight();
     else if(dir == KEY_DOWN) timer = TIME;
 }
 
 void a_press()
 {
-    if(gameover) return;
-    rotateRight();
+    
 }
 
 void b_press()
 {
-    if(gameover) return;
-    rotateLeft();
+    
 }
+

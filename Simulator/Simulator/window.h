@@ -13,7 +13,7 @@
 #include "Input.h"
 #include <iostream>
 
-#define SIDEWAYS
+//#define SIDEWAYS
 
 #ifdef SIDEWAYS
 

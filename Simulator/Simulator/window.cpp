@@ -21,6 +21,10 @@ void startLoop()
 
 	while (running)
 	{
+        userInput input = {
+            
+        };//getUserInput();
+        
 		// Event handling...
 		SDL_Event e;
 		while (SDL_PollEvent(&e))
@@ -32,27 +36,24 @@ void startLoop()
 			else if (e.type == SDL_KEYDOWN)
 			{
 				if (e.key.keysym.sym == SDLK_ESCAPE) running = false;
-                	}
+                if (e.key.keysym.sym == SDLK_LEFT) input.direction_press = KEY_LEFT;
+                if (e.key.keysym.sym == SDLK_RIGHT) input.direction_press = KEY_RIGHT;
+                if (e.key.keysym.sym == SDLK_UP) input.direction_press = KEY_UP;
+                if (e.key.keysym.sym == SDLK_DOWN) input.direction_press = KEY_DOWN;
+            } else if (e.type == SDL_KEYUP) input.direction_press = false;
                 /**
                   TODO implement input....
                  */
 		}
 
-        userInput input = {
-            
-        };//getUserInput();
-            	if(lastDir != input.direction_press && input.direction_press != -1) direction_press(input.direction_press);
-            	lastDir = input.direction_press;
-		if(input.a_press) a_press();
-            	if(input.b_press) b_press();
+        if(lastDir != input.direction_press && input.direction_press != -1) direction_press(input.direction_press);
+        lastDir = input.direction_press;
+        if(input.a_press) a_press();
+        if(input.b_press) b_press();
 
 		// game....
 
-		for (int i = 0; i < WIDTH * HEIGHT; i++) pixels[i] = 0; // Clear screen
 		render(); // Render stuff
-
-		SDL_SetRenderDrawColor(renderer, 0, 0, 0, 0xFF);
-		SDL_RenderClear(renderer);
 
 		// rendering...
 		for (int i = 0; i < WIDTH * HEIGHT; i++)

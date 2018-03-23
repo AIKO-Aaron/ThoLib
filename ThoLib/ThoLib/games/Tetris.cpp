@@ -64,25 +64,29 @@ void newBrick()
             {
                 // Copy line j-1 to j
                 for(int k = 0; k < WIDTH; k++) {
-		    field[k + j * WIDTH] = field[k + (j-1) * WIDTH];
+                    field[k + j * WIDTH] = field[k + (j-1) * WIDTH];
+	            }
 	        }
-	    }
         }
         for(int i = WIDTH * HEIGHT - 1; i >= 0; i--)
         {
-	    if(line) clearPixel(HEIGHT - 2 - (i / WIDTH), i % WIDTH);
+            if(line) {
+                usleep(16000);
+                clearPixel(HEIGHT - 2 - (i / WIDTH), i % WIDTH);
+            }
             if(field[i] == 0) continue; // No brick that could fall down...
             if(i / WIDTH != HEIGHT - 1 && field[i + WIDTH] == 0) // Below brick is free
             {
                 if(canFallDown(i))
                 {
-		    //drawPixel(HEIGHT - i / WIDTH, i % WIDTH, 0));// indexToColor(field[i]));
+                    clearPixel(HEIGHT - 1 - (i / WIDTH), i % WIDTH);
                     field[i + WIDTH] = field[i];
                     field[i] = 0;
+                    drawPixel(HEIGHT - (i / WIDTH), i % WIDTH, indexToColor(field[i]));
+                    usleep(16000);
                 }
             }
-	    if(line) drawPixel(HEIGHT - 1 - (i / WIDTH) + 1, i % WIDTH, indexToColor(field[i]));
-            if(line) usleep(16000);
+            if(line) drawPixel(HEIGHT - 1 - (i / WIDTH), i % WIDTH, indexToColor(field[i]));
         }
     }
     
@@ -118,25 +122,6 @@ void rotateRight()
     }
 }
 
-void rotateLeft()
-{
-    pos center = movingBrick[1];
-    for(int i = 0; i < 4; i++)
-    {
-        int l = movingBrick[i].x;
-        int x = -(movingBrick[i].y - center.y) + center.x;
-        int y = (l - center.x) + center.y;
-        if(x < 0 || x >= WIDTH || y < 0 || y >= HEIGHT || field[x + y * WIDTH] != 0) return;
-    }
-    for(int i = 0; i < 4; i++)
-    {
-        int l = movingBrick[i].x;
-        movingBrick[i].x = -(movingBrick[i].y - center.y) + center.x;
-        movingBrick[i].y = (l - center.x) + center.y;
-    }
-}
-
-
 void Tetris::setupGame()
 {
     pos* p = bricks[rand() % 7];
@@ -148,22 +133,6 @@ void Tetris::setupGame()
 void Tetris::render()
 {
     if(gameover) --gameover;
-    
-	/**
-    for(int i = 0; i < WIDTH * HEIGHT; i++)
-    {
-        if(gameover > 0)
-        {
-            drawPixel(i % WIDTH, i / WIDTH, ((gameover / 10) % 2 == 1) ? (field[i] == 0 ? 0x000000 : indexToColor(field[i])) : 0x000000);
-            if(gameover == 1)
-            {
-                for(int i = 0; i < WIDTH * HEIGHT; i++) field[i] = 0;
-                pos* p = bricks[rand() % 7];
-                for(int i = 0; i < 4; i++) movingBrick[i] = p[i];
-            }
-        }
-        else drawPixel(i % WIDTH, i / WIDTH, field[i] == 0 ? 0x000000 : indexToColor(field[i]));
-    }*/
 
     if(gameover) {
 	if(gameover == 1) {
@@ -238,7 +207,7 @@ void Tetris::direction_press(int dir)
         for(int i = 0; i < 4; i++)
         {
             clearPixel(HEIGHT-1-movingBrick[i].y, movingBrick[i].x);
-	    if(movingBrick[i].x - 1 < 0 || field[movingBrick[i].x - 1 + movingBrick[i].y * WIDTH]) return;
+            if(movingBrick[i].x - 1 < 0 || field[movingBrick[i].x - 1 + movingBrick[i].y * WIDTH]) return;
         }
         for(int i = 0; i < 4; i++)
         {
@@ -250,14 +219,10 @@ void Tetris::direction_press(int dir)
 
 void Tetris::a_press()
 {
-    /**
-    if(gameover) return;
-    rotateRight();*/
+
 }
 
 void Tetris::b_press()
 {
-    /**
-    if(gameover) return;
-    rotateLeft();*/
+
 }

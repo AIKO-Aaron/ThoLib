@@ -150,7 +150,6 @@ class Flappy : public Game
     void b_press() override;
 };
 
-<<<<<<< HEAD
 class GameSelector : public Game
 {
 public:
@@ -163,18 +162,7 @@ private:
 	void b_press() override;
 	void select_press();
 	void start_press();
-=======
-// Only add games to selection list if finished
-class GameSelector : public Game
-{
-    int index;
-    
-    void setupGame() override;
-    void render() override;
-    void direction_press(int dir) override;
-    void a_press() override;
-    void b_press() override;
->>>>>>> 19a7671aded6e1ed5703e36a179abbcdabcd929c
+
 };
 
 #endif /* Game_h */
