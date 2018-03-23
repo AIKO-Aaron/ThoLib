@@ -148,14 +148,13 @@ void Tetris::render()
             for(int i = 0; i < 4; i++) movingBrick[i] = p[i];
         }
     }
+    
+    pos cpy[4];
+    memcpy(cpy, movingBrick, 4 * sizeof(pos));
 
     if(++timer >= TIME && !gameover)
     {
         // Clear current brick...
-        for(int i = 0; i < 4; i++)
-    	{
-            drawPixel(HEIGHT-1-movingBrick[i].y, movingBrick[i].x, 0);
-    	}
 
         timer = 0;
         bool couldMove = true;
@@ -192,6 +191,10 @@ void Tetris::render()
             drawPixel(HEIGHT-1-movingBrick[i].y, movingBrick[i].x, indexToColor(currentIndex + 1));
         }
         usleep(100000);
+        for(int i = 0; i < 4; i++)
+        {
+            clearPixel(HEIGHT-1-cpy[i].y, cpy[i].x);
+        }
         tet_draw = false;
     }
 }
