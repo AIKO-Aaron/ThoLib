@@ -23,16 +23,14 @@ int gameover = 0;
 int indexToColor(int index)
 {
     int randNum1 = ((0x123456 * index) % 0xFFFFFF);
-    
-    float sqrt3 = sqrt(3);
-    
+        
     float r = (randNum1 >> 16) % 0xFF;
     float g = (randNum1 >> 8) % 0xFF;
     float b = (randNum1) % 0xFF;
 
-    r /= sqrt3;
-    g /= sqrt3;
-    b /= sqrt3;
+    r /= 3;
+    g /= 3;
+    b /= 3;
     
     switch((randNum1 & 0x11000) >>3) {
         case 0:
