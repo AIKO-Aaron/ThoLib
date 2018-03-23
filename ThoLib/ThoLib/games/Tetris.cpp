@@ -185,16 +185,16 @@ void Tetris::render()
 
     if(tet_draw) {
         for(int i = 0; i < WIDTH; i++) drawPixel(HEIGHT - 1, i, field[i] == 0 ? 0x000000 : indexToColor(field[i])); // Test this....
+        for(int i = 0; i < 4; i++)
+        {
+            drawPixel(HEIGHT-1-cpy[i].y, cpy[i].x, indexToColor(currentIndex + 1));
+        }
         usleep(30000);
         for(int i = 0; i < 4; i++)
         {
             drawPixel(HEIGHT-1-movingBrick[i].y, movingBrick[i].x, indexToColor(currentIndex + 1));
         }
         usleep(100000);
-        for(int i = 0; i < 4; i++)
-        {
-            clearPixel(HEIGHT-1-cpy[i].y, cpy[i].x);
-        }
         tet_draw = false;
     }
 }
