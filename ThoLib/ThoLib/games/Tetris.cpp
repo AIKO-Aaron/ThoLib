@@ -21,15 +21,17 @@ int gameover = 0;
 
 int indexToColor(int index)
 {
-    int maxCol = rand() % 3;
+    int randNum1 = ((0x123456 * index) % 0xFFFFFF);
+    
+    int maxCol = (randNum1 >> 16) % 3;
     int shift = 8 * maxCol;
     int secShift = 8 * ((maxCol + 1) % 3);
     
-    int max = rand() % 0x20 + 0xE0;
-    int mid = rand() % 0x20 + 0xA0;
+    int max = (randNum1 & 0xFF) % 0x20 + 0xE0;
+    int mid = ((randNum1 >> 8) & 0xFF) % 0x20 + 0xA0;
     int min = 510 - max - mid;
     
-    return max << shift | mid << secShift | min;
+    return max << shift | mid << secShift | min;    
 }
 
 static pos bricks[7][4] = {
