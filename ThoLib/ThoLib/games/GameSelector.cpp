@@ -104,5 +104,6 @@ void GameSelector::direction_press(int dir) {
         usleep(500000); // Wait for cleared screen
         clearScreen();
         g->run();
+        redraw = 1;
     }
 }
