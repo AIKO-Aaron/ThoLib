@@ -65,7 +65,7 @@ void newBrick()
                 // Copy line j-1 to j
                 for(int k = 0; k < WIDTH; k++) {
                     field[k + j * WIDTH] = field[k + (j-1) * WIDTH];
-                    drawPixel(HEIGHT - 1 - j, k, indexToColor(field[k + (j) * WIDTH]));
+                    drawPixel(HEIGHT - 1 - j, k, field[k + (j) * WIDTH] == 0 ? 0 : indexToColor(field[k + (j) * WIDTH]));
                     usleep(16000);
 	            }
 	        }
