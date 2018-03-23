@@ -37,10 +37,13 @@ int indexToColor(int index)
     switch((randNum1 & 0x11000) >>3) {
         case 0:
             r += 0x50;
+            break;
         case 1:
             g += 0x50;
+            break;
         case 2:
             b += 0x50;
+            break;
     }
     
     return (int)r << 16 | (int)g << 8 | (int)b;
