@@ -71,10 +71,9 @@ void GameSelector::render() {
     if(redraw) {
         for(int i = 0; i < 150; i++) {
             drawPixel(WIDTH - 1 - i / HEIGHT, i % HEIGHT, pixels[p_index][i]);
-	    //std::cout << i << ":" << (i / WIDTH) << std::endl;
-	    usleep(40000);
+            usleep(40000);
         }
-	--redraw;
+        --redraw;
     }
 }
 
@@ -85,8 +84,8 @@ void GameSelector::direction_press(int dir) {
         p_index = (p_index + 1) % GAME_COUNT;
         redraw = 1;
     } else if(dir == 2) {
-	std::cout << "Starting game: " << p_index << std::endl;
-	Game *g;
+        std::cout << "Starting game: " << p_index << std::endl;
+        Game *g;
         switch(p_index) {
             case 0:
                 g = new Snake();
@@ -101,8 +100,8 @@ void GameSelector::direction_press(int dir) {
                 g = new GameSelector(); // Should never be called....
                 break;
         }
-	clearScreen();
-	usleep(1000000);
+        usleep(500000); // Wait for cleared screen
+        clearScreen();
         g->run();
     }
 }

@@ -135,17 +135,17 @@ void Tetris::render()
     if(gameover) --gameover;
 
     if(gameover) {
-	if(gameover == 1) {
-	    for(int i = 0; i < WIDTH * HEIGHT; i++) field[i] = 0;
+        if(gameover == 1) {
+            for(int i = 0; i < WIDTH * HEIGHT; i++) field[i] = 0;
             pos* p = bricks[rand() % 7];
             for(int i = 0; i < 4; i++) movingBrick[i] = p[i];
-	}
+        }
     }
 
     if(++timer >= TIME && !gameover)
     {
-	// Clear current brick...
-	for(int i = 0; i < 4; i++)
+        // Clear current brick...
+        for(int i = 0; i < 4; i++)
     	{
             drawPixel(HEIGHT-1-movingBrick[i].y, movingBrick[i].x, 0);
     	}
@@ -163,26 +163,26 @@ void Tetris::render()
         {
             for(int i = 0; i < 4; i++)
             {
-		int inField = movingBrick[i].x + movingBrick[i].y * WIDTH;
+                int inField = movingBrick[i].x + movingBrick[i].y * WIDTH;
                 drawPixel(HEIGHT-1-movingBrick[i].y, movingBrick[i].x, field[inField] == 0?0x000000:indexToColor(field[inField]));
-		--movingBrick[i].y;
+                --movingBrick[i].y;
             }
-	    for(int i = 0; i < 4; i++)
-   	    {
-        	drawPixel(HEIGHT-1-movingBrick[i].y, movingBrick[i].x, indexToColor(currentIndex + 1));
-    	    }
+            for(int i = 0; i < 4; i++)
+            {
+                drawPixel(HEIGHT-1-movingBrick[i].y, movingBrick[i].x, indexToColor(currentIndex + 1));
+            }
             newBrick();
         }
-	tet_draw = true;
+        tet_draw = true;
     }
 
     if(tet_draw) {
-	//for(int i = 0; i < HEIGHT; i++) drawPixel(HEIGHT, i, 0);
-	for(int i = 0; i < 4; i++)
+        for(int i = 0; i < 9; i++) drawPixel(HEIGHT - 1, i, field[i] == 0 ? 0x000000 : indexToColor(field[i])); // Test this....
+        for(int i = 0; i < 4; i++)
         {
             drawPixel(HEIGHT-1-movingBrick[i].y, movingBrick[i].x, indexToColor(currentIndex + 1));
         }
-	tet_draw = false;
+        tet_draw = false;
     }
 }
 
