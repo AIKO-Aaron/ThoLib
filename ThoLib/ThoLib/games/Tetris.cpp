@@ -81,8 +81,8 @@ void newBrick()
                 {
                     clearPixel(HEIGHT - 1 - (i / WIDTH), i % WIDTH);
                     field[i + WIDTH] = field[i];
-                    field[i] = 0;
                     drawPixel(HEIGHT - (i / WIDTH), i % WIDTH, indexToColor(field[i]));
+                    field[i] = 0;
                     usleep(16000);
                 }
             }
@@ -167,6 +167,7 @@ void Tetris::render()
                 drawPixel(HEIGHT-1-movingBrick[i].y, movingBrick[i].x, field[inField] == 0?0x000000:indexToColor(field[inField]));
                 --movingBrick[i].y;
             }
+            usleep(100000);
             for(int i = 0; i < 4; i++)
             {
                 drawPixel(HEIGHT-1-movingBrick[i].y, movingBrick[i].x, indexToColor(currentIndex + 1));
@@ -182,6 +183,7 @@ void Tetris::render()
         {
             drawPixel(HEIGHT-1-movingBrick[i].y, movingBrick[i].x, indexToColor(currentIndex + 1));
         }
+        usleep(100000);
         tet_draw = false;
     }
 }
@@ -195,7 +197,7 @@ void Tetris::direction_press(int dir)
         for(int i = 0; i < 4; i++)
         {
             clearPixel(HEIGHT-1-movingBrick[i].y, movingBrick[i].x);
-	    if(movingBrick[i].x + 1 >= WIDTH || field[movingBrick[i].x + 1 + movingBrick[i].y * WIDTH] != 0) return;
+            if(movingBrick[i].x + 1 >= WIDTH || field[movingBrick[i].x + 1 + movingBrick[i].y * WIDTH] != 0) return;
         }
         for(int i = 0; i < 4; i++)
         {
