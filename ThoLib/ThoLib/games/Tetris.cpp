@@ -23,28 +23,12 @@ int gameover = 0;
 int indexToColor(int index)
 {
     int randNum1 = ((0x123456 * index) % 0xFFFFFF);
-        
-    float r = (randNum1 >> 16) % 0xFF;
-    float g = (randNum1 >> 8) % 0xFF;
-    float b = (randNum1) % 0xFF;
-
-    r /= 3;
-    g /= 3;
-    b /= 3;
     
-    switch((randNum1 & 0x11000) >>3) {
-        case 0:
-            r += 0x50;
-            break;
-        case 1:
-            g += 0x50;
-            break;
-        case 2:
-            b += 0x50;
-            break;
-    }
-    
-    return (int)r << 16 | (int)g << 8 | (int)b;
+    int randByte = (randNum1 >> 16) % 0xFF;
+    randByte = 255 - randByte;
+    if(randByte < 85) return (255-randByte*3) << 16 | (randByte * 3);
+    if(randByte < 170) return (255-randByte*3) | (randByte * 3) << 8;    
+    return (randByte * 3) << 16 | (255 - randByte * 3) << 8;
 }
 
 static pos bricks[7][4] = {
