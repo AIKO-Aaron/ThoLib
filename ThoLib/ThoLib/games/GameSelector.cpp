@@ -71,8 +71,9 @@ void GameSelector::render() {
     if(redraw) {
         for(int i = 0; i < 150; i++) {
             drawPixel(WIDTH - 1 - i / HEIGHT, i % HEIGHT, pixels[p_index][i]);
-            usleep(40000);
+            usleep(16000);
         }
+        std::cout << "Paint done" << std::endl;
         --redraw;
     }
 }
