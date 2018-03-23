@@ -129,7 +129,8 @@ void Tetris::setupGame()
     pos* p = bricks[rand() % 7];
     for(int i = 0; i < WIDTH * HEIGHT; i++) field[i] = 0;
     for(int i = 0; i < 4; i++) movingBrick[i] = p[i];
-    currentIndex = 1;
+    srand(time(NULL));
+    currentIndex = rand();
 }
 
 void Tetris::render()
