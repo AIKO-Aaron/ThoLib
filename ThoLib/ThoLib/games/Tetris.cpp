@@ -2,6 +2,7 @@
 #include <iostream>
 #include <vector>
 #include <unistd.h>
+#include <cmath>
 
 #define TIME 50
 
@@ -23,15 +24,26 @@ int indexToColor(int index)
 {
     int randNum1 = ((0x123456 * index) % 0xFFFFFF);
     
-    int maxCol = (randNum1 >> 16) % 3;
-    int shift = 8 * maxCol;
-    int secShift = 8 * ((maxCol + 1) % 3);
+    float sqrt3 = sqrt(3);
     
-    int max = (randNum1 & 0xFF) % 0x20 + 0xE0;
-    int mid = ((randNum1 >> 8) & 0xFF) % 0x20 + 0xA0;
-    int min = 255 - (max + mid) / 2;
+    float r = (randNum1 >> 16) % 0xFF;
+    float g = (randNum1 >> 8) % 0xFF;
+    float b = (randNum1) % 0xFF;
+
+    r /= sqrt3;
+    g /= sqrt3;
+    b /= sqrt3;
     
-    return max << shift | mid << secShift | min;
+    switch((randNum1 & 0x11000) >>3) {
+        case 0:
+            r += 0x50;
+        case 1:
+            g += 0x50;
+        case 2:
+            b += 0x50;
+    }
+    
+    return (int)r << 16 | (int)g << 8 | (int)b;
 }
 
 static pos bricks[7][4] = {
