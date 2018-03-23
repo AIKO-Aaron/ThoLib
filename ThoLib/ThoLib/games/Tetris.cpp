@@ -14,6 +14,7 @@
 unsigned int currentIndex = 0;
 bool tet_draw = true;
 
+int dropped_bricks = 0;
 pos movingBrick[4]; // the moving brick --> all bricks have 4 tiles
 unsigned int field[WIDTH * HEIGHT]; // 15 * 10 --> 150 tiles
 int gameover = 0;
@@ -44,6 +45,7 @@ bool canFallDown(int i)
 
 void newBrick()
 {
+    ++dropped_bricks;
     if(++currentIndex == 0) ++currentIndex; // Overflow protection
     for(int i = 0; i < 4; i++) field[movingBrick[i].x + movingBrick[i].y * WIDTH] = currentIndex;
     
@@ -132,6 +134,7 @@ void Tetris::setupGame()
     gameover = 0;
     srand((int) time(NULL));
     currentIndex = rand();
+    dropped_bricks = 0;
 }
 
 void Tetris::render()
@@ -153,7 +156,7 @@ void Tetris::render()
     pos cpy[4];
     memcpy(cpy, movingBrick, 4 * sizeof(pos));
 
-    if(++timer >= TIME && !gameover)
+    if(++timer >= TIME - (dropped_bricks / 20) && !gameover)
     {
         // Clear current brick...
 
@@ -191,6 +194,7 @@ void Tetris::render()
             for(int i = 0; i < 4; i++)
             {
                 drawPixel(HEIGHT-1-cpy[i].y, cpy[i].x, 0);
+                usleep(16000);
             }
         }
         usleep(30000);

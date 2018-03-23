@@ -14,17 +14,12 @@ pos foodpos = { rand() % WIDTH, rand() % HEIGHT };
 int direction = 0;
 std::vector<pos> currentSnake = std::vector<pos>();
 
-void die() {
-	clearScreen();
-	drawPixel(foodpos.x, foodpos.y, 0xFF0000);
-	for(int i = 0; i < currentSnake.size(); i++) clearPixel(currentSnake[i].x, currentSnake[i].y);
-	currentSnake.clear();
-}
-
 void Snake::setupGame() {
 	drawPixel(foodpos.x, foodpos.y, 0xFF0000);
-	die();
-}
+    clearScreen();
+    drawPixel(foodpos.x, foodpos.y, 0xFF0000);
+    for(int i = 0; i < currentSnake.size(); i++) clearPixel(currentSnake[i].x, currentSnake[i].y);
+    currentSnake.clear();}
 
 bool inSnake(int x, int y) {
 	for(int i = 0; i < currentSnake.size(); i++) if(currentSnake[i].x == x && currentSnake[i].y == y) return true;
@@ -55,8 +50,8 @@ void Snake::render()
             if(currentSnake[i].x == currentSnake[0].x && currentSnake[i].y == currentSnake[0].y && (currentSnake.size() > 4 && currentSnake.size() - 1 != i))
             {
                 //currentSnake.clear();
-                die();
-		direction = 0;
+                running = false;
+                return;
             }
             currentSnake[i] = currentSnake[i - 1];
         }
@@ -67,8 +62,8 @@ void Snake::render()
         {
 	    //for(int i = 0; i < currentSnake.size(); i++) drawPixel(currentSnake[0].x, currentSnake[i].y, 0);
             //currentSnake.clear();
-            die();
-	    direction = 0;
+            running = false;
+            return;
         }
 
         drawPixel(foodpos.x, foodpos.y, 0xFF0000);

@@ -87,7 +87,7 @@ public:
 	    if(input.a_press) a_press();
             if(input.b_press) b_press();
 
-	    if(!mainGame && input.start_press) return;
+	    if(!mainGame && input.select_press) return;
 	    if(mainGame && (input.select_press || input.start_press) && !pressed) {
 		direction_press(input.select_press | input.start_press << 1);
                 pressed = true;
