@@ -79,9 +79,9 @@ void newBrick()
             {
                 if(canFallDown(i))
                 {
-                    clearPixel(HEIGHT - 1 - (i / WIDTH), i % WIDTH);
+                    //clearPixel(HEIGHT - 1 - (i / WIDTH), i % WIDTH);
                     field[i + WIDTH] = field[i];
-                    drawPixel(HEIGHT - (i / WIDTH), i % WIDTH, indexToColor(field[i]));
+                    drawPixel(HEIGHT - 1 - (i / WIDTH), i % WIDTH, indexToColor(field[i]));
                     field[i] = 0;
                     usleep(16000);
                 }
