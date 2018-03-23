@@ -29,9 +29,9 @@ int indexToColor(int index)
     
     int max = (randNum1 & 0xFF) % 0x20 + 0xE0;
     int mid = ((randNum1 >> 8) & 0xFF) % 0x20 + 0xA0;
-    int min = 510 - max - mid;
+    int min = 255 - (max + mid) / 2;
     
-    return max << shift | mid << secShift | min;    
+    return max << shift | mid << secShift | min;
 }
 
 static pos bricks[7][4] = {
