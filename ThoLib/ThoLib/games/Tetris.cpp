@@ -187,7 +187,7 @@ void Tetris::render()
         for(int i = 0; i < WIDTH; i++) drawPixel(HEIGHT - 1, i, field[i] == 0 ? 0x000000 : indexToColor(field[i])); // Test this....
         for(int i = 0; i < 4; i++)
         {
-            drawPixel(HEIGHT-1-cpy[i].y, cpy[i].x, indexToColor(currentIndex + 1));
+            drawPixel(HEIGHT-1-cpy[i].y, cpy[i].x, 0);
         }
         usleep(30000);
         for(int i = 0; i < 4; i++)
