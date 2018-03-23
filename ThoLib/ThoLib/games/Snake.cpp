@@ -93,5 +93,5 @@ void Snake::direction_press(int dir)
 	//die();
         //currentSnake.clear();
         //direction = 0;
-    } else direction = dir;
+    } else direction = (dir+1) % 4;
 }

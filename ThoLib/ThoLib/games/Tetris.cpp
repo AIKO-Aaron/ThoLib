@@ -3,7 +3,7 @@
 #include <vector>
 #include <unistd.h>
 
-#define TIME 60
+#define TIME 50
 
 #undef WIDTH
 #undef HEIGHT
