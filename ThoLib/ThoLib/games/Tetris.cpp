@@ -149,6 +149,7 @@ void Tetris::render()
         }
     }
     
+    bool clear = true;
     pos cpy[4];
     memcpy(cpy, movingBrick, 4 * sizeof(pos));
 
@@ -178,6 +179,7 @@ void Tetris::render()
             {
                 drawPixel(HEIGHT-1-movingBrick[i].y, movingBrick[i].x, indexToColor(currentIndex + 1));
             }
+            clear = false;
             newBrick();
         }
         tet_draw = true;
@@ -185,9 +187,11 @@ void Tetris::render()
 
     if(tet_draw) {
         for(int i = 0; i < WIDTH; i++) drawPixel(HEIGHT - 1, i, field[i] == 0 ? 0x000000 : indexToColor(field[i])); // Test this....
-        for(int i = 0; i < 4; i++)
-        {
-            drawPixel(HEIGHT-1-cpy[i].y, cpy[i].x, 0);
+        if(clear) {
+            for(int i = 0; i < 4; i++)
+            {
+                drawPixel(HEIGHT-1-cpy[i].y, cpy[i].x, 0);
+            }
         }
         usleep(30000);
         for(int i = 0; i < 4; i++)
