@@ -65,14 +65,16 @@ void newBrick()
                 // Copy line j-1 to j
                 for(int k = 0; k < WIDTH; k++) {
                     field[k + j * WIDTH] = field[k + (j-1) * WIDTH];
+                    drawPixel(HEIGHT - 1 - j, k, indexToColor(field[k + (j) * WIDTH]));
+                    usleep(16000);
 	            }
 	        }
         }
         for(int i = WIDTH * HEIGHT - 1; i >= 0; i--)
         {
             if(line) {
-                usleep(16000);
-                clearPixel(HEIGHT - 2 - (i / WIDTH), i % WIDTH);
+                //usleep(16000);
+                //clearPixel(HEIGHT - 2 - (i / WIDTH), i % WIDTH);
             }
             if(field[i] == 0) continue; // No brick that could fall down...
             if(i / WIDTH != HEIGHT - 1 && field[i + WIDTH] == 0) // Below brick is free
@@ -81,12 +83,12 @@ void newBrick()
                 {
                     //clearPixel(HEIGHT - 1 - (i / WIDTH), i % WIDTH);
                     field[i + WIDTH] = field[i];
-                    drawPixel(HEIGHT - 1 - (i / WIDTH), i % WIDTH, indexToColor(field[i]));
+                    //drawPixel(HEIGHT - 1 - (i / WIDTH), i % WIDTH, indexToColor(field[i]));
                     field[i] = 0;
-                    usleep(16000);
+                    //usleep(16000);
                 }
             }
-            if(line) drawPixel(HEIGHT - 1 - (i / WIDTH), i % WIDTH, indexToColor(field[i]));
+            //if(line) drawPixel(HEIGHT - 1 - (i / WIDTH), i % WIDTH, indexToColor(field[i]));
         }
     }
     
