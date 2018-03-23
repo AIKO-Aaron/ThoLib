@@ -186,6 +186,7 @@ void Tetris::render()
 
     if(tet_draw) {
         for(int i = 0; i < WIDTH; i++) drawPixel(HEIGHT - 1, i, field[i] == 0 ? 0x000000 : indexToColor(field[i])); // Test this....
+        usleep(30000);
         for(int i = 0; i < 4; i++)
         {
             drawPixel(HEIGHT-1-movingBrick[i].y, movingBrick[i].x, indexToColor(currentIndex + 1));
@@ -198,7 +199,7 @@ void Tetris::render()
 void Tetris::direction_press(int dir)
 {
     if(gameover) return;
-    tet_draw = true;
+    tet_draw = true; // Force redraw if something was pressed
     if(dir == KEY_RIGHT)
     {
         for(int i = 0; i < 4; i++)
