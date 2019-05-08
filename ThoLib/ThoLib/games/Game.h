@@ -48,7 +48,7 @@ typedef struct pos
 {
     int x, y;
 } pos;
-static int timer; // A timer (for convinience in the games, because they all have a global timer variable)
+static int timer; // A timer (for convenience in the games, because they all have a global timer variable)
 static int lastDir = 0;
 
 class Game
